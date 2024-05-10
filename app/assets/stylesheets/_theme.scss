@@ -4,6 +4,9 @@ $primary-color: #012970;
   margin-top: 60px;
   padding: 20px 30px;
   transition: all 0.3s;
+
+  height: calc(100vh - 60px);
+  overflow-y: auto;
 }
 
 .page-title {
