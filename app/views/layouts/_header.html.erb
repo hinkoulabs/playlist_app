@@ -1,0 +1,11 @@
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <div class="logo d-flex align-items-center justify-content-between">
+    <i class="bi bi-list toggle-sidebar-btn"
+       data-controller="sidebar"
+       data-action="click->sidebar#toggle"
+    ></i>
+    <%= link_to root_path, class: "d-flex align-items-center" do %>
+      <span class="d-lg-block"><%= t("application_name") %></span>
+    <% end %>
+  </div>
+</header>

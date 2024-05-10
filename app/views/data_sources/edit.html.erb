@@ -1,0 +1,9 @@
+<%= content_for(:breadcrumbs) do %>
+  <% render("layouts/breadcrumbs/breadcrumbs", links: [{ title: t("navigation.settings"), url: setting_path }, { title: t('data_source.edit.title') }]) %>
+<% end %>
+
+<h3><%= t('data_source.edit.title') %></h3>
+
+<%= turbo_frame_tag dom_id(@data_source) do %>
+  <%= render "form", data_source: @data_source %>
+<% end %>

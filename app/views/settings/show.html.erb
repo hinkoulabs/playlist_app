@@ -1,0 +1,14 @@
+<%= content_for(:breadcrumbs) do %>
+  <% render("layouts/breadcrumbs/breadcrumbs", links: [{ title: t("navigation.settings") }]) %>
+<% end %>
+
+<h3><%= t("navigation.settings") %></h3>
+
+<div class="card">
+  <div class="card-header">
+    <%= @data_source.class.model_name.human %>
+  </div>
+  <div class="card-body">
+    <%= render "data_sources/data_source", data_source: @data_source %>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<% if (links = local_assigns[:links]) %>
+  <nav style="--bs-breadcrumb-divider: '/';" aria-label="breadcrumb" class="my-2">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to t('navigation.home'), root_path  %></li>
+      <% current_link = links.pop %>
+      <% links.each do |l| %>
+        <li class="breadcrumb-item"><%= link_to(l[:title], l[:url]) %></li>
+      <% end %>
+
+      <li class="breadcrumb-item active" aria-current="page"><%= current_link[:title] %></li>
+    </ol>
+  </nav>
+<% end %>

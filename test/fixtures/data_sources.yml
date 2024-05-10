@@ -1,0 +1,9 @@
+source:
+  id: 1
+  url: http://localhost:5000/videos
+  proxy:
+
+source_without_request:
+  id: 2
+  url: http://localhost:6000/videos
+  proxy:

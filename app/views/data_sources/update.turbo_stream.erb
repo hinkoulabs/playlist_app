@@ -1,0 +1,5 @@
+<%= turbo_stream.replace dom_id(@data_source) do %>
+  <%= render "data_source", data_source: @data_source %>
+<% end %>
+
+<%= render_turbo_stream_flash_messages %>

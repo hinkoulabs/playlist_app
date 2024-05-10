@@ -1,0 +1,152 @@
+$primary-color: #012970;
+
+#main {
+  margin-top: 60px;
+  padding: 20px 30px;
+  transition: all 0.3s;
+}
+
+.page-title {
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color;
+}
+
+.header {
+  transition: all 0.5s;
+  z-index: 997;
+  height: 60px;
+  box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+  background-color: #fff;
+  padding-left: 20px;
+
+  .toggle-sidebar-btn {
+    font-size: 32px;
+    padding-left: 10px;
+    cursor: pointer;
+    color: $primary-color;
+  }
+
+  .logo {
+    width: 280px;
+
+    span {
+      width: 235px;
+      font-size: 26px;
+      font-weight: 700;
+      color: $primary-color;
+      font-family: "Nunito", sans-serif;
+      text-align: center;
+    }
+  }
+}
+
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  z-index: 996;
+  transition: all 0.3s;
+  padding: 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #aab7cf transparent;
+  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  background-color: #fff;
+}
+
+.sidebar-nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  .nav-item {
+    margin-bottom: 5px;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: $primary-color;
+    background: #f6f9ff;
+    padding: 10px 15px;
+    border-radius: 4px;
+
+    i {
+      font-size: 16px;
+      margin-right: 10px;
+      color: $primary-color;
+    }
+  }
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: 0px -20px;
+
+  padding: 20px 0;
+  font-size: 14px;
+
+  a {
+    color: $primary-color;
+  }
+
+  .copyright {
+    text-align: center;
+    color: $primary-color;
+  }
+
+  .credits {
+    padding-top: 5px;
+    text-align: center;
+    font-size: 13px;
+    color: $primary-color;
+  }
+}
+
+#fetch-request-log {
+  .modal-body{
+    padding: 20px;
+    max-height: 400px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #main {
+    margin-left: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #main {
+    margin-left: 300px;
+  }
+
+  .toggle-sidebar-btn{
+    display: none;
+  }
+
+}
+
+@media (max-width: 1199px) {
+  #main {
+    padding: 20px;
+  }
+
+  .sidebar {
+    left: -300px;
+  }
+
+  .toggle-sidebar .sidebar {
+    left: 0;
+  }
+}

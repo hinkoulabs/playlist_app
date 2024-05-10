@@ -1,0 +1,109 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     en:
+#       "yes": yup
+#       enabled: "ON"
+
+en:
+  application_name: Playlist App
+  navigation:
+    home: Home
+    playlists: Playlists
+    settings: Settings
+
+  activerecord:
+    models:
+      data_source: Data Source
+      fetch_request:
+        one: Fetch Request
+        other: Fetch Requests
+    attributes:
+      data_source:
+        url: "Url"
+        proxy: "Proxy"
+      fetch_request:
+        created_at: "Created At"
+        status: "Status"
+        url: "URL"
+        log: "Log"
+        page: "Page"
+
+  helpers:
+    no_data: No Data
+    submit:
+      create: "Create"
+      update: "Update"
+
+  actions:
+    edit: Edit
+    cancel: Cancel
+    close: Close
+    fetch_videos: Fetch Videos
+    restart: Restart
+
+  setting:
+    show:
+      table:
+        setting: Setting
+        value: Value
+
+
+  data_source:
+    edit:
+      title: Edit Datasource
+
+  badges:
+    true: TRUE
+    false: FALSE
+
+  flash:
+    data_source:
+      update:
+        success: Data source was successfully updated
+        error: Data source was failed to save
+    fetch_requests:
+      create:
+        success: Request has been created. Videos will be uploaded soon
+        error: Request has been rejected (%{reason})
+      update:
+        success: Request will be processed soon
+        error: Request has been rejected (%{reason})
+
+  fetch_requests:
+    statuses:
+      processing: Processing
+      done: Done
+      error: Error
+    limits:
+      worker_limit: Workers are busy
+
+  navbar:
+    toggle_navigation: Toggle Navigation
+  footer:
+    copyright: "© Copyright"
+    rights: "All Rights Reserved"
+    developed_by: "Designed by"
+

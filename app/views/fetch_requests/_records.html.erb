@@ -1,0 +1,38 @@
+<% if @fetch_requests.size > 0 %>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+      <th scope="col"><%= FetchRequest.human_attribute_name("created_at") %></th>
+      <th scope="col"><%= FetchRequest.human_attribute_name("status") %></th>
+      <th scope="col"><%= FetchRequest.human_attribute_name("url") %></th>
+      <th scope="col"><%= FetchRequest.human_attribute_name("page") %></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @fetch_requests.each do |request| %>
+      <tr>
+        <td><%= request.created_at %></td>
+        <td><%= request_status_badge(request.status) %></td>
+        <td><%= request.url %></td>
+        <td><%= request.page %></td>
+        <td>
+          <% if request.error? %>
+            <%= link_to(FetchRequest.human_attribute_name("log"), '#', class: 'btn btn-sm btn-primary', data: { controller:"modal", action: "modal#show", modal_id_param: 'fetch-request-log', modal_body_param: request.log }) %>
+            <%= link_to(t('actions.restart'), fetch_request_path(request), class: 'btn btn-sm btn-primary', data: { turbo_method: :put } ) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
+
+<%= render("error_modal") %>
+
+<% else %>
+  <div><%= t('helpers.no_data') %></div>
+<% end %>

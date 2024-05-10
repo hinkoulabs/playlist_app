@@ -1,0 +1,9 @@
+<%= content_for(:breadcrumbs) do %>
+  <% render("layouts/breadcrumbs/breadcrumbs", links: [{ title: t("navigation.settings"), url: setting_path }, { title: FetchRequest.model_name.human(count: 2) }]) %>
+<% end %>
+
+<h3><%= FetchRequest.model_name.human(count: 2) %></h3>
+
+<%= turbo_frame_tag 'fetch_requests' do %>
+  <%= render('records') %>
+<% end %>

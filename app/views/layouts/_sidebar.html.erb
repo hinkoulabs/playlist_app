@@ -1,0 +1,20 @@
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <%= nav_link(t("navigation.home"), root_path, 'grid') %>
+    </li>
+
+    <li class="nav-item">
+      <%= nav_link(t("navigation.playlists"), root_path, 'collection-play') %>
+    </li>
+
+    <li class="nav-item">
+      <%= nav_link(t("navigation.settings"), setting_path, 'gear-wide-connected') %>
+    </li>
+
+  </ul>
+
+  <%= render("layouts/footer") %>
+</aside>
