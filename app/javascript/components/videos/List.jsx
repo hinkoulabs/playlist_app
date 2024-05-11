@@ -1,39 +1,29 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ListGroup, Image, Button } from 'react-bootstrap';
+import VideoModal from "./VideoModal";
 
 const ListItem = ({ video }) => {
-    const [showFullDescription, setShowFullDescription] = useState(false);
-    const [showToggleButton, setShowToggleButton] = useState(false);
-    const descriptionRef = useRef(null);
-
-    useEffect(() => {
-        // Check if the description's content is overflowing
-        if (descriptionRef.current.scrollHeight > descriptionRef.current.clientHeight) {
-            setShowToggleButton(true);
-        } else {
-            setShowToggleButton(false);
-        }
-    }, [video.description]);
-
-    const toggleDescription = () => {
-        setShowFullDescription(prev => !prev);
-    };
+    const [modalShow, setModalShow] = useState(false);
 
     return (
         <ListGroup.Item as="li" className="d-flex align-items-start video-list">
             <Image src={video.thumbnail_url} thumbnail className="video-image" />
             <div className="ms-3 flex-grow-1">
-                <small>Views: {video.view_count}</small>
-                <h5>{video.title}</h5>
-                <p ref={descriptionRef} className="video-description" style={{ maxHeight: showFullDescription ? 'none' : '4.5em', overflow: 'hidden' }}>
+                <h5 className="text-ellipsis">{video.title}</h5>
+                <p className="text-ellipsis">
                     {video.description}
                 </p>
-                {showToggleButton && (
-                    <Button className="description-toggle" variant="link" size="sm" onClick={toggleDescription}>
-                        {showFullDescription ? 'Show Less' : 'Read More'}
-                    </Button>
-                )}
+                <small>Views: {video.view_count}</small>
+                <Button variant="link" size="sm" onClick={() => setModalShow(true)}>
+                    Read More
+                </Button>
             </div>
+            <VideoModal
+                video={video}
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+
+            />
         </ListGroup.Item>
     );
 };

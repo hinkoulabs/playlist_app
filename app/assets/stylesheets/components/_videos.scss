@@ -15,32 +15,36 @@
   padding: 10px;
 }
 
+.text-ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 .video-list {
   overflow-y: auto;
 
   .video-image {
-    height: 200px;
+    height: 100px;
     object-fit: cover;
   }
 
   .video-description {
     margin-bottom: 0;
   }
-
-  .description-toggle {
-    padding: 0;
-  }
 }
 
 .video-grid {
-  .video-image {
+  .cover-image {
     height: 200px;
     object-fit: cover;
   }
 }
 
-.video-grid-modal {
-  .modal-top-content{
+.responsive-modal {
+  .modal-body-header{
     text-align: center;
     margin-bottom: 20px;
 
@@ -51,7 +55,7 @@
     }
   }
 
-  .modal-description{
+  .modal-body-description{
     max-height: 200px;
     overflow-y: auto;
   }
