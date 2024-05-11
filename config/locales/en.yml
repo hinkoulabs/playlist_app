@@ -40,6 +40,9 @@ en:
       fetch_request:
         one: Fetch Request
         other: Fetch Requests
+      playlist:
+        one: Playlist
+        other: Playlists
     attributes:
       data_source:
         url: "Url"
@@ -50,7 +53,8 @@ en:
         url: "URL"
         log: "Log"
         page: "Page"
-
+      playlist:
+        name: Name
   helpers:
     no_data: No Data
     submit:
@@ -58,11 +62,15 @@ en:
       update: "Update"
 
   actions:
+    add: Add
     edit: Edit
     cancel: Cancel
     close: Close
     fetch_videos: Fetch Videos
     restart: Restart
+    delete: Delete
+    create_playlist: Create Playlist
+    add_videos: Add Videos
 
   setting:
     show:
@@ -74,7 +82,15 @@ en:
   data_source:
     edit:
       title: Edit Datasource
-
+  playlists:
+    index:
+      hero: Welcome to Playlist App. The place where you can create your custom playlists easily.
+    show:
+      hero: Welcome to playlist "%{name}" page. Videos are empty. Please add new videos.
+    new:
+      title: New Playlist
+    edit:
+      title: Edit Playlist
   badges:
     true: TRUE
     false: FALSE
@@ -83,7 +99,7 @@ en:
     data_source:
       update:
         success: Data source was successfully updated
-        error: Data source was failed to save
+        error: Data source has not been updated
     fetch_requests:
       create:
         success: Request has been created. Videos will be uploaded soon
@@ -91,7 +107,19 @@ en:
       update:
         success: Request will be processed soon
         error: Request has been rejected (%{reason})
+    playlists:
+      create:
+        success: Playlist has been created
+        error: Playlist has not been created (%{reason})
+      update:
+        success: Playlist has been updated
+        error: Playlist has not been updated (%{reason})
+      destroy:
+        success: Playlist has been deleted
 
+  confirm:
+    playlist:
+      delete: Are you sure you want to delete the playlist?
   fetch_requests:
     statuses:
       processing: Processing

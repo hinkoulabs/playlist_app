@@ -1,0 +1,7 @@
+<%= content_for(:breadcrumbs) do %>
+  <% render("layouts/breadcrumbs/breadcrumbs", links: [{ title: Playlist.model_name.human(count: 2), url: playlists_path }, { title: @playlist.name }]) %>
+<% end %>
+
+<h3><%= @playlist.name %></h3>
+
+<%= render("show_hero") %>

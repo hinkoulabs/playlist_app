@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_145410) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_11_153311) do
   create_table "data_sources", force: :cascade do |t|
     t.string "url"
     t.boolean "proxy"
@@ -27,6 +27,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_145410) do
     t.integer "page"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "playlist_videos", force: :cascade do |t|
+    t.integer "playlist_id"
+    t.integer "video_id"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["playlist_id"], name: "index_playlist_videos_on_playlist_id"
+    t.index ["video_id"], name: "index_playlist_videos_on_video_id"
+  end
+
+  create_table "playlists", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_playlists_on_name", unique: true
   end
 
   create_table "settings", force: :cascade do |t|

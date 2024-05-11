@@ -1,4 +1,7 @@
 class Video < ApplicationRecord
+  has_many :playlist_videos, dependent: :destroy
+  has_many :playlists, through: :playlist_videos
+
   # other fields might be empty
   validates :title, presence: true
 

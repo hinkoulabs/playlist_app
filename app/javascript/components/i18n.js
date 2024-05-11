@@ -19,7 +19,8 @@ i18n
                         },
                         "utils": {
                             "EmptyResults": {
-                                "message": "Sorry, we couldn't find any results matching your criteria."
+                                "message": "Sorry, we couldn't find any results matching your criteria.",
+                                "no_data": "No Data Found"
                             },
                             "InfiniteScroll": {
                                 "loading_more": "Loading more ..."
