@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
-import List from './Videos/List';
-import Grid from './Videos/Grid';
+import React, {useState, useEffect} from 'react';
+import {Button, Badge} from 'react-bootstrap';
+import Grid from './videos/Grid';
 import SearchInput from './utils/SearchInput';
 import InfiniteScroll from './utils/InfiniteScroll';
 import SkeletonLoader from './utils/SkeletonLoader';
-import ViewModeSelector from './utils/ViewModeSelector';
 import EmptyResults from './utils/EmptyResults';
-import { getRecords } from './requests';
+import {getRecords} from './requests';
+import {useTranslation} from 'react-i18next';
 
-const Videos = ({ videosUrl, projectsUrl }) => {
+const Videos = ({videosUrl, projectsUrl}) => {
+    const {t} = useTranslation("translation", {keyPrefix: "components.Videos"});
+
     const [videos, setVideos] = useState([]);
+    const [selectedIds, setSelectedIds] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
-    const [viewMode, setViewMode] = useState('list');
     const [selectModeEnabled, setSelectModeEnabled] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [page, setPage] = useState(1);
@@ -45,37 +46,81 @@ const Videos = ({ videosUrl, projectsUrl }) => {
         fetchVideos(page, searchQuery);
     };
 
+    const addToPlaylist = () => {
+        resetSelection();
+    }
+
+    const resetSelection = () => {
+        setSelectModeEnabled(false);
+        setSelectedIds([]);
+    }
+
     const toggleSelectMode = () => {
-        setSelectModeEnabled(!selectModeEnabled);
+        if (selectModeEnabled) {
+
+            if (selectedIds.length) {
+                if (confirm(t('select.deselect_confirmation'))) {
+                    resetSelection()
+                }
+            } else {
+                resetSelection()
+            }
+        } else {
+            setSelectModeEnabled(true);
+        }
     };
+
+    const selectHandler = (id) => {
+        if (selectedIds.includes(id)) {
+            setSelectedIds(ids => ids.filter(i => i !== id))
+        } else {
+            setSelectedIds(ids => [...ids, id])
+        }
+    }
 
     const buildView = () => {
         if (videos.length === 0) {
             if (isLoading) {
-                return <SkeletonLoader count={5} />
-            }else{
-                return <EmptyResults />;
+                return <SkeletonLoader count={5}/>
+            } else {
+                return <EmptyResults/>;
             }
         }
         return (
             <InfiniteScroll loadMore={handleLoadMore} hasMore={hasMore} isLoading={isLoading}>
-                { viewMode === 'list' ? <List videos={videos} /> : <Grid videos={videos} />}
+                <Grid videos={videos} selectModeEnabled={selectModeEnabled} selectedIds={selectedIds}
+                      selectHandler={selectHandler}/>
             </InfiniteScroll>
         );
     };
 
+    const addPlaylistButtons = selectedIds.length ? (
+        <Button variant="outline-success" className="float-start m-1 position-relative" onClick={addToPlaylist}>
+            {t("add_to_playlist")}
+            <Badge bg="danger" className="position-absolute top-0 start-100 translate-middle rounded-pill">
+                {selectedIds.length}
+            </Badge>
+        </Button>
+    ) : null;
+
     return (
         <div className="videos-container">
             <div className="videos-controls">
-                <Button className="float-start" onClick={toggleSelectMode}>
-                    {selectModeEnabled ? 'Cancel Select' : 'Select'}
+                <Button
+                    variant={selectModeEnabled ? "outline-primary" : "outline-secondary"}
+                    className="float-start my-1"
+                    onClick={toggleSelectMode}>
+                    {t("select.link")}
                 </Button>
-                <ViewModeSelector viewMode={viewMode} changeViewMode={setViewMode} />
-                <SearchInput disabled={selectModeEnabled} handleFetch={q => {
-                    setPage(1);
-                    setSearchQuery(q);
-                }} />
-                Total Videos: {videos.length}
+                {addPlaylistButtons}
+                <SearchInput
+                    placeholder={t('search_placeholder')}
+                    disabled={selectModeEnabled}
+                    handleFetch={q => {
+                        setPage(1);
+                        setSearchQuery(q);
+                    }}/>
+                {t("total_count", {count: videos.length})}
             </div>
             <div className="videos-scrollable-content">
                 {buildView()}

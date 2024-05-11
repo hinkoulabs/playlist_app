@@ -1,6 +1,9 @@
 import React from 'react';
 import {ButtonGroup, ToggleButton} from 'react-bootstrap';
+import {useTranslation} from "react-i18next";
 const ViewModeSelector = ({ viewMode, changeViewMode }) => {
+    const {t} = useTranslation("translation", { keyPrefix: "components.utils.ViewModeSelector" });
+
     return <ButtonGroup className="mb-3 float-end">
         <ToggleButton
             id="toggle-list"
@@ -11,7 +14,7 @@ const ViewModeSelector = ({ viewMode, changeViewMode }) => {
             checked={viewMode === 'list'}
             onChange={(e) => changeViewMode('list')}
         >
-            List View
+            {t("list")}
         </ToggleButton>
         <ToggleButton
             id="toggle-grid"
@@ -22,7 +25,7 @@ const ViewModeSelector = ({ viewMode, changeViewMode }) => {
             checked={viewMode === 'grid'}
             onChange={(e) => changeViewMode('grid')}
         >
-            Grid View
+            {t("grid")}
         </ToggleButton>
     </ButtonGroup>;
 };

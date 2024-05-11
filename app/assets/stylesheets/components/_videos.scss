@@ -41,6 +41,11 @@
     height: 200px;
     object-fit: cover;
   }
+
+  .read-more{
+    text-wrap: nowrap;
+    cursor: pointer;
+  }
 }
 
 .responsive-modal {

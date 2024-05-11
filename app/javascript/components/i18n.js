@@ -7,17 +7,36 @@ i18n
         resources: {
             en: {
                 translation: {
-                    "list_view": "List View",
-                    "grid_view": "Grid View",
-                    "enable_select_mode": "Enable Select Mode",
-                    "disable_select_mode": "Disable Select Mode",
-                    "search_videos": "Search Videos",
-                    "no_videos_found": "No videos found.",
-                    "load_more": "Load More",
-                    "add_to_project": "Add to Project",
-                    "select_videos": "Select Videos",
-                    "create_project": "Create Project",
-                    "video_count": "Views: {{count}}"
+                    "components": {
+                        "Videos": {
+                            "total_count": "Total Videos: {{ count }}",
+                            "search_placeholder": "Search Videos",
+                            "add_to_playlist": "Add To Playlist",
+                            "select": {
+                                "link": "Select Mode",
+                                "deselect_confirmation": "Are you sure to reset mode? Selected items will be lost."
+                            }
+                        },
+                        "utils": {
+                            "EmptyResults": {
+                                "message": "Sorry, we couldn't find any results matching your criteria."
+                            },
+                            "InfiniteScroll": {
+                                "loading_more": "Loading more ..."
+                            },
+                            "SearchInput": {
+                                "placeholder": "Search"
+                            },
+                            "ViewModeSelector": {
+                                "grid": "Grid View",
+                                "list": "List View"
+                            }
+                        }
+                    },
+                    "video": {
+                        "view_count": "View Count: {{count}}",
+                        "read_more": "Read More"
+                    }
                 }
             }
         },

@@ -1,7 +1,7 @@
 import React from "react";
 import {createRoot} from "react-dom/client";
+import "./i18n";
 import Videos from "./Videos";
-
 
 document.addEventListener("turbo:load", () => {
     const container = document.getElementById("video-list")

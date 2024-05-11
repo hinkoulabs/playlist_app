@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
-const SearchInput = ({ handleFetch, disabled }) => {
+import {useTranslation} from "react-i18next";
+const SearchInput = ({ handleFetch, placeholder, disabled }) => {
+    const {t} = useTranslation("translation", { keyPrefix: "components.utils.SearchInput" });
+
     const [query, setQuery] = useState('');
 
     useEffect(() => {
@@ -21,7 +24,7 @@ const SearchInput = ({ handleFetch, disabled }) => {
             disabled={disabled}
             type="text"
             className="mb-3"
-            placeholder="Search videos"
+            placeholder={placeholder || t("placeholder")}
             value={query}
             onChange={(e) => handleSearch(e.target.value)}
         />

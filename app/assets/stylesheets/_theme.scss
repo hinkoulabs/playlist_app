@@ -13,10 +13,11 @@ $primary-color: #012970;
   margin-bottom: 10px;
 }
 
-a {
+a, .btn-link{
   text-decoration: none;
-  color: $primary-color;
+  //color: $primary-color;
 }
+
 
 .header {
   transition: all 0.5s;
@@ -114,6 +115,10 @@ a {
     font-size: 13px;
     color: $primary-color;
   }
+}
+
+.cursor-pointer{
+  cursor: pointer;
 }
 
 #fetch-request-log {

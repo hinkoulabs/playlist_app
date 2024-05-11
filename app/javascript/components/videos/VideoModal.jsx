@@ -11,7 +11,7 @@ const VideoModal = ({show, onHide, video}) => {
             header={
                 <>
                     <Image src={video.thumbnail_url} alt="thumbnail"/>
-                    <p><small>Views: {video.view_count}</small></p>
+                    <p><small><i className="bi bi-eye"></i> {video.view_count}</small></p>
                 </>
             }
 

@@ -1,15 +1,18 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { FaSadTear } from 'react-icons/fa'; // This imports a specific icon from FontAwesome
+import { FaSadTear } from 'react-icons/fa';
+import {useTranslation} from 'react-i18next';
 
 const EmptyResults = ({ message }) => {
+    const {t} = useTranslation("translation", { keyPrefix: "components.utils.Videos" });
+
     return (
         <Container className="d-flex justify-content-center align-items-center" style={{ height: '400px' }}>
             <Row>
                 <Col xs={12} className="text-center">
-                    <FaSadTear size={50} className="mb-3" /> {/* Displaying the icon */}
+                    <FaSadTear size={50} className="mb-3" />
                     <h5>No Data Found</h5>
-                    <p>{message || "Sorry, we couldn't find any results matching your criteria."}</p>
+                    <p>{message || t("message")}</p>
                 </Col>
             </Row>
         </Container>
