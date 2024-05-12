@@ -1,4 +1,6 @@
 class PlaylistsController < ApplicationController
+  include VideosConcern
+
   before_action :find_playlist, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -23,6 +25,13 @@ class PlaylistsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.json  do
+        get_videos(@playlist.videos)
+        render "videos/index"
+      end
+    end
   end
 
   def edit

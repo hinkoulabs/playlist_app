@@ -39,7 +39,8 @@ class PlaylistVideosController < ApplicationController
 
   # the action is used to reorder videos (:video_ids) inside selected playlist
   def update
-    update_positions(self.video_ids)
+    # update existing videos only
+    update_positions(self.video_ids & @playlist.video_ids)
 
     notice = t("flash.playlist_videos.update.success")
 
@@ -99,6 +100,6 @@ class PlaylistVideosController < ApplicationController
       }
     end
 
-    PlaylistVideo.upsert_all(attributes)
+    PlaylistVideo.upsert_all(attributes, unique_by: %i[playlist_id video_id])
   end
 end

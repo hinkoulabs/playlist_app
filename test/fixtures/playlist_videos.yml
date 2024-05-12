@@ -10,12 +10,12 @@ pv_1_5:
   id: 2
   playlist_id: 1
   video_id: 5
-  position: 1
+  position: 2
 
 pv_1_1:
   id: 3
   playlist_id: 1
   video_id: 1
-  position: 1
+  position: 3
 
 

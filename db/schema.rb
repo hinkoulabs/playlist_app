@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_12_105325) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_12_160424) do
   create_table "data_sources", force: :cascade do |t|
     t.string "url"
     t.boolean "proxy"
@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_105325) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["playlist_id", "video_id"], name: "index_playlist_videos_on_playlist_id_and_video_id", unique: true
     t.index ["playlist_id"], name: "index_playlist_videos_on_playlist_id"
     t.index ["video_id"], name: "index_playlist_videos_on_video_id"
   end

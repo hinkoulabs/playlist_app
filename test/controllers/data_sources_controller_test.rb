@@ -1,7 +1,7 @@
 require "test_helper"
 
 class DataSourcesControllerTest < ActionDispatch::IntegrationTest
-  test "should get edit" do
+  test "should edit" do
     assert_no_difference("DataSource.count") do
       get edit_data_source_url
     end
@@ -9,7 +9,7 @@ class DataSourcesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should put update" do
+  test "should update" do
     assert_no_difference("DataSource.count") do
       patch data_source_url, params: { data_source: valid_params  }
     end
@@ -22,7 +22,7 @@ class DataSourcesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should put update with invalid data" do
+  test "should update with invalid data" do
     assert_no_difference("DataSource.count") do
       patch data_source_url, params: { data_source: invalid_params }
     end
@@ -34,7 +34,7 @@ class DataSourcesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should put update.turbo_stream" do
+  test "should update.turbo_stream" do
     assert_no_difference("DataSource.count") do
       patch data_source_url(format: :turbo_stream), params: { data_source: valid_params  }
     end
@@ -47,7 +47,7 @@ class DataSourcesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should put update.turbo_stream with invalid data" do
+  test "should update.turbo_stream with invalid data" do
     assert_no_difference("DataSource.count") do
       patch data_source_url(format: :turbo_stream), params: { data_source: invalid_params }
     end

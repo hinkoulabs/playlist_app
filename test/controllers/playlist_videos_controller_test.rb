@@ -75,6 +75,45 @@ class PlaylistVideosControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  context 'update' do
+    setup do
+      @playlist = playlists(:first)
+      @success_message = 'Videos were successfully reordered'
+    end
+
+    should "return error request if video_is are missing" do
+      assert_no_difference(["Playlist.count", "PlaylistVideo.count"]) do
+        patch playlist_video_url(@playlist), as: :json
+      end
+
+      assert_failure_response('New videos were not added (param is missing or the value is empty: video_ids)')
+    end
+
+    should "reorder selected videos" do
+      assert_no_difference(["Playlist.count", "PlaylistVideo.count"]) do
+        patch playlist_video_url(@playlist), params: { video_ids: [1, 3, 2, 10, 5, 1, 16] }, as: :json
+      end
+
+      @playlist.reload
+
+      assert_record_attributes @playlist, { video_ids: [1, 3, 5]  }
+
+      assert_success_response(@success_message)
+    end
+
+    should "reorder selected videos (first 2 elements), other will be have the same ordering they have before" do
+      assert_no_difference(["Playlist.count", "PlaylistVideo.count"]) do
+        patch playlist_video_url(@playlist), params: { video_ids: [5, 2, 10, 3] }, as: :json
+      end
+
+      @playlist.reload
+
+      assert_record_attributes @playlist, { video_ids: [5, 3, 1]  }
+
+      assert_success_response(@success_message)
+    end
+  end
+
   context 'destroy' do
     setup do
       @playlist = playlists(:first)
