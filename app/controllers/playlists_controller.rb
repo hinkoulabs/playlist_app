@@ -4,7 +4,15 @@ class PlaylistsController < ApplicationController
   before_action :find_playlist, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pagy, @playlists = pagy(Playlist, items: 10)
+    scope = Playlist.order_by_name
+    respond_to do |format|
+      format.html do
+        @pagy, @playlists = pagy(scope, items: 10)
+      end
+      format.json do
+        @playlists = scope
+      end
+    end
   end
 
   def new
@@ -27,7 +35,7 @@ class PlaylistsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json  do
+      format.json do
         get_videos(@playlist.videos)
         render "videos/index"
       end

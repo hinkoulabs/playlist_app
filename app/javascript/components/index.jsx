@@ -10,7 +10,8 @@ document.addEventListener("turbo:load", () => {
         root.render(
             <Videos
                 videosUrl={container.dataset.videosUrl}
-                projectsUrl={container.dataset.projectsUrl}
+                playlistsUrl={container.dataset.playlistsUrl}
+                addVideosToPlaylistsUrl={container.dataset.addVideosToPlaylistsUrl}
             />
         );
     }

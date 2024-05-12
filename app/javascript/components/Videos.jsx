@@ -6,10 +6,12 @@ import InfiniteScroll from './shared/InfiniteScroll';
 import SkeletonLoader from './shared/SkeletonLoader';
 import EmptyResults from './shared/EmptyResults';
 import LoadedStats from './shared/LoadedStats';
+import AddToPlaylistModal from "./videos/AddToPlaylistModal";
 import {getRecords} from './requests';
 import {useTranslation} from 'react-i18next';
 import notifier from "../notifier";
-const Videos = ({videosUrl, projectsUrl}) => {
+
+const Videos = ({videosUrl, playlistsUrl, addVideosToPlaylistsUrl}) => {
     const {t} = useTranslation("translation", {keyPrefix: "components.Videos"});
 
     const [videos, setVideos] = useState([]);
@@ -20,6 +22,7 @@ const Videos = ({videosUrl, projectsUrl}) => {
     const [selectModeEnabled, setSelectModeEnabled] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [page, setPage] = useState(1);
+    const [showAddToPlaylistModal, setShowAddToPlaylistModal] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
@@ -56,7 +59,7 @@ const Videos = ({videosUrl, projectsUrl}) => {
     };
 
     const addToPlaylist = () => {
-        resetSelection();
+        setShowAddToPlaylistModal(true)
     }
 
     const resetSelection = () => {
@@ -126,7 +129,23 @@ const Videos = ({videosUrl, projectsUrl}) => {
                     placeholder={t('search_placeholder')}
                     disabled={selectModeEnabled}
                     handleFetch={handleSearch}/>
-                <LoadedStats prefix={t('loadedStatsPrefix')} loadedCount={videos.length} meta={videosMeta} />
+                <LoadedStats prefix={t('loadedStatsPrefix')} loadedCount={videos.length} meta={videosMeta}/>
+                {
+                    showAddToPlaylistModal && <AddToPlaylistModal
+                        show={true}
+                        onHide={() => {
+                            setShowAddToPlaylistModal(false)
+                        }}
+                        selectedIds={selectedIds}
+                        onSubmit={
+                            () => {
+                                resetSelection();
+                            }
+                        }
+                        playlistsUrl={playlistsUrl}
+                        addVideosToPlaylistsUrl={addVideosToPlaylistsUrl}
+                    />
+                }
             </div>
             <div className="videos-scrollable-content">
                 {buildView()}

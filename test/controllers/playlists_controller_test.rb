@@ -1,9 +1,23 @@
 require "test_helper"
 
 class PlaylistsControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
+  test "should index" do
     get playlists_url
     assert_response :success
+  end
+
+  test "should index,json" do
+    get playlists_url, as: :json
+    assert_response :success
+    assert_equal(
+      {
+        "records"=>[
+          {"id"=>1, "name"=>"First"},
+          {"id"=>2, "name"=>"Second"}
+        ]
+      },
+      response.parsed_body
+    )
   end
 
   test "should new" do

@@ -1,5 +1,3 @@
-# app/views/videos/index.json.jbuilder
-
 json.records @videos do |video|
   json.extract! video, :id, :title, :description, :thumbnail_url, :view_count
 end
