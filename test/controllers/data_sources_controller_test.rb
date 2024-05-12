@@ -63,15 +63,13 @@ class DataSourcesControllerTest < ActionDispatch::IntegrationTest
 
   def invalid_params
     {
-      url: '',
-      proxy: true
+      url: ''
     }
   end
 
   def valid_params
     {
-      url: "http://some_new_url.com/videos",
-      proxy: true
+      url: "http://some_new_url.com/videos"
     }
   end
 end

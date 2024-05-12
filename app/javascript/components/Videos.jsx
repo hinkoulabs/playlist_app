@@ -9,7 +9,6 @@ import LoadedStats from './shared/LoadedStats';
 import {getRecords} from './requests';
 import {useTranslation} from 'react-i18next';
 import notifier from "../notifier";
-
 const Videos = ({videosUrl, projectsUrl}) => {
     const {t} = useTranslation("translation", {keyPrefix: "components.Videos"});
 
@@ -17,7 +16,7 @@ const Videos = ({videosUrl, projectsUrl}) => {
     const [videosMeta, setVideosMeta] = useState(null);
     const [selectedIds, setSelectedIds] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [hasMore, setHasMore] = useState(true);
+    const [hasMore, setHasMore] = useState(false);
     const [selectModeEnabled, setSelectModeEnabled] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [page, setPage] = useState(1);
@@ -49,6 +48,11 @@ const Videos = ({videosUrl, projectsUrl}) => {
         if (!hasMore) return;
         // Fetch the next page
         fetchVideos(page, searchQuery);
+    };
+
+    const handleSearch = (q) => {
+        setPage(1);
+        setSearchQuery(q);
     };
 
     const addToPlaylist = () => {
@@ -121,10 +125,7 @@ const Videos = ({videosUrl, projectsUrl}) => {
                 <SearchInput
                     placeholder={t('search_placeholder')}
                     disabled={selectModeEnabled}
-                    handleFetch={q => {
-                        setPage(1);
-                        setSearchQuery(q);
-                    }}/>
+                    handleFetch={handleSearch}/>
                 <LoadedStats prefix={t('loadedStatsPrefix')} loadedCount={videos.length} meta={videosMeta} />
             </div>
             <div className="videos-scrollable-content">

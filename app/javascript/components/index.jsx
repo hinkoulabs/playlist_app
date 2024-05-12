@@ -8,12 +8,10 @@ document.addEventListener("turbo:load", () => {
     if (container) {
         const root = createRoot(container);
         root.render(
-            <React.StrictMode>
-                <Videos
-                    videosUrl={container.dataset.videosUrl}
-                    projectsUrl={container.dataset.projectsUrl}
-                />
-            </React.StrictMode>
+            <Videos
+                videosUrl={container.dataset.videosUrl}
+                projectsUrl={container.dataset.projectsUrl}
+            />
         );
     }
 });

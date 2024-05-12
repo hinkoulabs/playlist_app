@@ -32,7 +32,7 @@ const notyfOptions = {
 }
 
 const notifier = (type, message) => {
-    const notif = new Notyf(notyfOptions)
+    const notif = new Notyf(notyfOptions);
     return notif.open({ type, message });
 }
 
