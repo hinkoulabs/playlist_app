@@ -11,12 +11,12 @@ const animatedComponents = makeAnimated();
 const AddToPlaylistModal = ({show, onHide, selectedIds, onSubmit, playlistsUrl, addVideosToPlaylistsUrl}) => {
     const {t} = useTranslation("translation", {keyPrefix: "components.videos.AddToPlaylistModal"});
 
-    const [playlists, setPlaylists] = useState([]);
-    const [newPlaylistMode, setNewPlaylistMode] = useState(false);
-    const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+    const [formMode, setFormMode] = useState(false);
 
-    const [newPlaylistName, setNewPlaylistName] = useState('');
-    const [newPlaylistNameError, setNewPlaylistNameError] = useState(null);
+    const [playlists, setPlaylists] = useState([]);
+
+    const [formData, setFormData] = useState({});
+    const [formErrors, setFormErrors] = useState({});
 
     useEffect(() => {
         fetchPlaylists();
@@ -30,25 +30,17 @@ const AddToPlaylistModal = ({show, onHide, selectedIds, onSubmit, playlistsUrl, 
         }
     };
 
-    const handlePlaylistChange = selectedOption => {
-        setSelectedPlaylist(selectedOption);
-    };
-
-    const handleNewPlaylistNameChange = event => {
-        setNewPlaylistName(event.target.value);
-    };
-
     const handleSubmit = async () => {
         let payload = {
             video_ids: selectedIds
         };
 
-        if (newPlaylistMode) {
+        if (formMode) {
             payload['playlist'] = {
-                name: newPlaylistName
+                name: formData.name
             }
         } else {
-            if (selectedPlaylist) payload['id'] = selectedPlaylist.value;
+            if (formData.playlist) payload['id'] = formData.playlist.value;
         }
 
         const result = await createRecords(addVideosToPlaylistsUrl, payload);
@@ -63,7 +55,7 @@ const AddToPlaylistModal = ({show, onHide, selectedIds, onSubmit, playlistsUrl, 
             }
 
             if (result.playlist) {
-                setNewPlaylistNameError(result.playlist.name.join(', '))
+                setFormErrors(result.playlist)
             }
         }
     };
@@ -76,29 +68,33 @@ const AddToPlaylistModal = ({show, onHide, selectedIds, onSubmit, playlistsUrl, 
             <Modal.Body>
                 <Form>
                     {
-                        !newPlaylistMode && <Form.Group>
+                        !formMode && <Form.Group>
                             <Select
                                 components={animatedComponents}
                                 options={playlists}
-                                value={selectedPlaylist}
-                                onChange={handlePlaylistChange}
+                                value={formData.playlist}
+                                onChange={
+                                    (selectedOption) => setFormData(formData => ({...formData, playlist: selectedOption}))
+                                }
                                 placeholder={t("playlist_select_box.placeholder")}
                                 isClearable={true}
                             />
                         </Form.Group>
                     }
                     {
-                        newPlaylistMode && <Form.Group>
+                        formMode && <Form.Group>
                             <Form.Control
                                 type="text"
                                 placeholder={t("playlist_form.placeholder")}
-                                value={newPlaylistName}
-                                onChange={handleNewPlaylistNameChange}
-                                isInvalid={!!newPlaylistNameError}
+                                defaultValue={ formData.name }
+                                onChange={
+                                    (event) => setFormData( d => ({ ...d, name: event.target.value } ))
+                                }
+                                isInvalid={!!formErrors.name}
                             />
                             {
-                                !!newPlaylistNameError && <Form.Control.Feedback type="invalid">
-                                    {newPlaylistNameError}
+                                !!formErrors.name && <Form.Control.Feedback type="invalid">
+                                    {formErrors.name.join(', ')}
                                 </Form.Control.Feedback>
                             }
                         </Form.Group>
@@ -106,17 +102,17 @@ const AddToPlaylistModal = ({show, onHide, selectedIds, onSubmit, playlistsUrl, 
                     <Form.Group className="my-2">
                         <Form.Check
                             type="switch"
-                            checked={newPlaylistMode}
+                            checked={formMode}
                             label={t('switch')}
                             onChange={() => {
-                                setNewPlaylistMode(v => !v)
+                                setFormMode(v => !v)
                             }}
                         />
                     </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={handleSubmit} disabled={ newPlaylistMode ? !newPlaylistName : !selectedPlaylist }>
+                <Button variant="primary" onClick={handleSubmit} disabled={ formMode ? !formData.name : !formData.playlist }>
                     {t('add_button')}
                 </Button>
             </Modal.Footer>

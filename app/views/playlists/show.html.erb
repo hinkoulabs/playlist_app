@@ -11,9 +11,18 @@
   <%= link_to(edit_playlist_path(@playlist), class: 'header-link') do %>
     <i class="bi bi-pencil"></i>
   <% end %>
-  <%= link_to(edit_playlist_path(@playlist), class: 'header-link text-danger', data: { turbo_method: :delete, turbo_confirm: t("confirm.playlist.delete") }) do %>
+  <%= link_to(playlist_path(@playlist), class: 'header-link text-danger', data: { turbo_method: :delete, turbo_confirm: t("confirm.playlist.delete") }) do %>
     <i class="bi bi-trash"></i>
   <% end %>
 </h3>
 
-<%= render("show_hero") %>
+<% if @playlist.videos.count > 0 %>
+  <div
+    id="video-list"
+    data-videos-url="<%= playlist_url(@playlist, format: :json) %>"
+    data-playlists-url="<%= playlists_url(format: :json) %>"
+    data-add-videos-to-playlists-url="<%= playlist_videos_url(format: :json) %>"
+  ></div>
+<% else %>
+  <%= render("show_hero") %>
+<% end %>

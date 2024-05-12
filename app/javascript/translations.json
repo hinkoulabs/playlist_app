@@ -21,7 +21,7 @@
               "placeholder": "Enter new playlist name"
             },
             "playlist_select_box": {
-              "placeholder": "Search for a playlist..."
+              "placeholder": "Search playlist"
             },
             "notifications": {
               "added": "Videos were successfully added to the playlist"
