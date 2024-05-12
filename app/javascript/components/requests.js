@@ -12,6 +12,7 @@ export const getRecords = async (url, page, q) => {
         return {
             status: true,
             records: response.data.records,
+            meta: response.data.meta,
             hasMore: response.data.meta.total_pages !== page
         }
     } catch (error) {

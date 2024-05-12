@@ -5,6 +5,7 @@ import SearchInput from './shared/SearchInput';
 import InfiniteScroll from './shared/InfiniteScroll';
 import SkeletonLoader from './shared/SkeletonLoader';
 import EmptyResults from './shared/EmptyResults';
+import LoadedStats from './shared/LoadedStats';
 import {getRecords} from './requests';
 import {useTranslation} from 'react-i18next';
 import notifier from "../notifier";
@@ -13,6 +14,7 @@ const Videos = ({videosUrl, projectsUrl}) => {
     const {t} = useTranslation("translation", {keyPrefix: "components.Videos"});
 
     const [videos, setVideos] = useState([]);
+    const [videosMeta, setVideosMeta] = useState(null);
     const [selectedIds, setSelectedIds] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
@@ -32,6 +34,7 @@ const Videos = ({videosUrl, projectsUrl}) => {
         if (result.status) {
             setVideos(pageNum === 1 ? result.records : [...videos, ...result.records]);
             setHasMore(result.hasMore);
+            setVideosMeta(result.meta);
             // Prepare for next page load
             setPage(pageNum + 1);
         } else {
@@ -122,7 +125,7 @@ const Videos = ({videosUrl, projectsUrl}) => {
                         setPage(1);
                         setSearchQuery(q);
                     }}/>
-                {t("total_count", {count: videos.length})}
+                <LoadedStats prefix={t('loadedStatsPrefix')} loadedCount={videos.length} meta={videosMeta} />
             </div>
             <div className="videos-scrollable-content">
                 {buildView()}

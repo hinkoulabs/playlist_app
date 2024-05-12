@@ -9,7 +9,7 @@ i18n
                 translation: {
                     "components": {
                         "Videos": {
-                            "total_count": "Total Videos: {{ count }}",
+                            "loadedStatsPrefix": "Videos",
                             "search_placeholder": "Search Videos",
                             "add_to_playlist": "Add To Playlist",
                             "select": {
@@ -18,7 +18,7 @@ i18n
                             },
                             "failed_videos_load": "Failed to fetch videos"
                         },
-                        "utils": {
+                        "shared": {
                             "EmptyResults": {
                                 "message": "Sorry, we couldn't find any results matching your criteria.",
                                 "no_data": "No Data Found"
@@ -32,6 +32,9 @@ i18n
                             "ViewModeSelector": {
                                 "grid": "Grid View",
                                 "list": "List View"
+                            },
+                            "LoadedStats": {
+                                "total_count": "{{ prefix }}: {{ loadedCount }} / {{ totalCount }}",
                             }
                         }
                     },
