@@ -2,15 +2,11 @@
   <% render("layouts/breadcrumbs/breadcrumbs",
             links: [
               { title: Playlist.model_name.human(count: 2), url: playlists_path },
-              { title: @playlist.name, url: playlist_path(@playlist) },
+              { title: truncate_link_title(@playlist.name), url: playlist_path(@playlist) },
               { title: t('actions.edit') }
             ]) %>
 <% end %>
 
 <h3><%= t('playlists.edit.title') %></h3>
 
-<%= simple_form_for @playlist do |f| %>
-  <%= f.input :name %>
-  <%= f.button :submit, t("helpers.submit.update"), class: 'btn btn-primary mx-1' %>
-  <%= link_to t("actions.cancel"), playlists_path, class: 'btn btn-secondary' %>
-<% end %>
+<%= render 'form', back_url: playlist_path(@playlist) %>

@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {Button, Badge} from 'react-bootstrap';
 import Grid from './videos/Grid';
-import SearchInput from './utils/SearchInput';
-import InfiniteScroll from './utils/InfiniteScroll';
-import SkeletonLoader from './utils/SkeletonLoader';
-import EmptyResults from './utils/EmptyResults';
+import SearchInput from './shared/SearchInput';
+import InfiniteScroll from './shared/InfiniteScroll';
+import SkeletonLoader from './shared/SkeletonLoader';
+import EmptyResults from './shared/EmptyResults';
 import {getRecords} from './requests';
 import {useTranslation} from 'react-i18next';
+import notifier from "../notifier";
 
 const Videos = ({videosUrl, projectsUrl}) => {
     const {t} = useTranslation("translation", {keyPrefix: "components.Videos"});
@@ -34,7 +35,8 @@ const Videos = ({videosUrl, projectsUrl}) => {
             // Prepare for next page load
             setPage(pageNum + 1);
         } else {
-            console.error('Failed to fetch videos:', result.error);
+            setHasMore(false);
+            notifier("error", `${t('failed_videos_load')}: ${result.error}`);
         }
         // Reset loadingMore flag here after fetch completion
         setIsLoading(false);
@@ -95,7 +97,7 @@ const Videos = ({videosUrl, projectsUrl}) => {
     };
 
     const addPlaylistButtons = selectedIds.length ? (
-        <Button variant="outline-success" className="float-start m-1 position-relative" onClick={addToPlaylist}>
+        <Button variant="success" className="float-start my-2 mx-1 position-relative" onClick={addToPlaylist}>
             {t("add_to_playlist")}
             <Badge bg="danger" className="position-absolute top-0 start-100 translate-middle rounded-pill">
                 {selectedIds.length}
@@ -107,8 +109,8 @@ const Videos = ({videosUrl, projectsUrl}) => {
         <div className="videos-container">
             <div className="videos-controls">
                 <Button
-                    variant={selectModeEnabled ? "outline-primary" : "outline-secondary"}
-                    className="float-start my-1"
+                    variant={selectModeEnabled ? "primary" : "secondary"}
+                    className="float-start my-2"
                     onClick={toggleSelectMode}>
                     {t("select.link")}
                 </Button>

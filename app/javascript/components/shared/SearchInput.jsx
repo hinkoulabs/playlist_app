@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import {useTranslation} from "react-i18next";
 const SearchInput = ({ handleFetch, placeholder, disabled }) => {
-    const {t} = useTranslation("translation", { keyPrefix: "components.utils.SearchInput" });
+    const {t} = useTranslation("translation", { keyPrefix: "components.shared.SearchInput" });
 
     const [query, setQuery] = useState('');
 

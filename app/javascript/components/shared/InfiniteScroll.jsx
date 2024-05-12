@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useCallback } from 'react';
 import {useTranslation} from "react-i18next";
 
 const InfiniteScroll = ({ loadMore, hasMore, isLoading, children }) => {
-    const {t} = useTranslation("translation", { keyPrefix: "components.utils.InfiniteScroll" });
+    const {t} = useTranslation("translation", { keyPrefix: "components.shared.InfiniteScroll" });
     const observer = useRef();
 
     // Callback for setting the ref on the last element in the list

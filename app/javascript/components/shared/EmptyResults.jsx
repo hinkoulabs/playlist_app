@@ -4,7 +4,7 @@ import { FaSadTear } from 'react-icons/fa';
 import {useTranslation} from 'react-i18next';
 
 const EmptyResults = ({ message }) => {
-    const {t} = useTranslation("translation", { keyPrefix: "components.utils.EmptyResults" });
+    const {t} = useTranslation("translation", { keyPrefix: "components.shared.EmptyResults" });
 
     return (
         <Container className="d-flex justify-content-center align-items-center" style={{ height: '400px' }}>

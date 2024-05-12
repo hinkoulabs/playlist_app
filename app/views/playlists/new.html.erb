@@ -4,8 +4,4 @@
 
 <h3><%= t('playlists.new.title') %></h3>
 
-<%= simple_form_for @playlist do |f| %>
-  <%= f.input :name %>
-  <%= f.button :submit, t("helpers.submit.create"), class: 'btn btn-primary mx-1' %>
-  <%= link_to t("actions.cancel"), playlists_path, class: 'btn btn-secondary' %>
-<% end %>
+<%= render 'form', back_url: playlists_path %>

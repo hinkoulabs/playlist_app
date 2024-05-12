@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import {initReactI18next} from 'react-i18next';
 
 i18n
     .use(initReactI18next)
@@ -15,7 +15,8 @@ i18n
                             "select": {
                                 "link": "Select Mode",
                                 "deselect_confirmation": "Are you sure to reset mode? Selected items will be lost."
-                            }
+                            },
+                            "failed_videos_load": "Failed to fetch videos"
                         },
                         "utils": {
                             "EmptyResults": {

@@ -2,7 +2,7 @@ import React from 'react';
 import {ButtonGroup, ToggleButton} from 'react-bootstrap';
 import {useTranslation} from "react-i18next";
 const ViewModeSelector = ({ viewMode, changeViewMode }) => {
-    const {t} = useTranslation("translation", { keyPrefix: "components.utils.ViewModeSelector" });
+    const {t} = useTranslation("translation", { keyPrefix: "components.shared.ViewModeSelector" });
 
     return <ButtonGroup className="mb-3 float-end">
         <ToggleButton

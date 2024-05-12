@@ -1,5 +1,5 @@
-<%= simple_form_for playlist do |f| %>
+<%= simple_form_for @playlist do |f| %>
   <%= f.input :name %>
-  <%= f.button :submit, t("helpers.submit.create"), class: 'btn btn-primary mx-1' %>
-  <%= link_to t("actions.cancel"), playlist_path, class: 'btn btn-secondary' %>
+  <%= f.button :submit, @playlist.new_record? ? t("helpers.submit.create") : t("helpers.submit.update"), class: 'btn btn-primary mx-1' %>
+  <%= link_to t("actions.cancel"), back_url, class: 'btn btn-secondary' %>
 <% end %>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image} from 'react-bootstrap';
-import ResponsiveModal from "../utils/ResponsiveModal"
+import ResponsiveModal from "../shared/ResponsiveModal"
 
 const VideoModal = ({show, onHide, video}) => {
     return (
