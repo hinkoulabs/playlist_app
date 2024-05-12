@@ -1,6 +1,6 @@
 class Videos::Builder
-  def initialize(fetch_request)
-    @fetch_request = fetch_request
+  def initialize(data_source)
+    @data_source = data_source
   end
 
   def call(videos)
@@ -11,7 +11,7 @@ class Videos::Builder
 
   def save_videos(videos)
     videos.each do |attrs|
-      v = ::Video.find_or_initialize_by(external_id: attrs[:external_id], url: @fetch_request.url)
+      v = @data_source.videos.find_or_initialize_by(external_id: attrs[:external_id])
       v.update(attrs)
     end
   end

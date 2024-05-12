@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   resource :setting, only: [:show]
   resource :data_source, only: [:edit, :update]
 
-  resources :videos, only: [:index], defaults: { format: 'json' }
+  resources :videos, only: [:index]
   resources :playlists
+  resources :playlist_videos, only: [:create, :update, :destroy]
 
   resources :fetch_requests, only: [:index, :create, :update]
 

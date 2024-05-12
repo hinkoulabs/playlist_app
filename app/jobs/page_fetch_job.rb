@@ -11,13 +11,15 @@ class PageFetchJob < ActiveJob::Base
     videos = adapter.videos(json_body)
     total = adapter.total(json_body)
 
+    data_source = fetch_request.data_source
+
     # save videos from the page
-    b = Videos::Builder.new(fetch_request)
+    b = Videos::Builder.new(data_source)
     b.call(videos)
 
     fetch_request.update(status: "done", finished_at: Time.current)
 
-    process_next_pages(fetch_request, adapter, total, videos) if NEXT_PAGE_VALUES.include?(fetch_request.page)
+    process_next_pages(data_source, adapter, total, videos) if NEXT_PAGE_VALUES.include?(fetch_request.page)
   rescue => ex
     fetch_request.update(
       status: 'error',
@@ -28,7 +30,7 @@ class PageFetchJob < ActiveJob::Base
   protected
 
   def fetch_data(fetch_request, adapter)
-    conn = Faraday.new(url: fetch_request.url) do |faraday|
+    conn = Faraday.new(url: fetch_request.data_source.url) do |faraday|
       faraday.response :json
       faraday.adapter Faraday.default_adapter
     end
@@ -47,14 +49,14 @@ class PageFetchJob < ActiveJob::Base
     end
   end
 
-  def process_next_pages(fetch_request, adapter, total, videos)
+  def process_next_pages(data_source, adapter, total, videos)
     return unless videos.size > 0
 
     total_pages = (total.to_f / videos.size).ceil
 
     # Enqueue a job for each page
     (2..total_pages).each do |page|
-      next_page_request = FetchRequest.create(url: fetch_request.url, page: page, created_at: Time.current)
+      next_page_request = FetchRequest.create(data_source: data_source, page: page, created_at: Time.current)
 
       PageFetchJob.perform_later(next_page_request, adapter)
     end

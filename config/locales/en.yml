@@ -102,20 +102,28 @@ en:
         error: Data source has not been updated
     fetch_requests:
       create:
-        success: Request has been created. Videos will be uploaded soon
-        error: Request has been rejected (%{reason})
+        success: Request was created. Videos will be uploaded soon
+        error: Request was rejected (%{reason})
       update:
         success: Request will be processed soon
-        error: Request has been rejected (%{reason})
+        error: Request was rejected (%{reason})
     playlists:
       create:
-        success: Playlist has been created
-        error: Playlist has not been created (%{reason})
+        success: Playlist was created
+        error: Playlist was not created (%{reason})
       update:
-        success: Playlist has been updated
-        error: Playlist has not been updated (%{reason})
+        success: Playlist was updated
+        error: Playlist was not updated (%{reason})
       destroy:
-        success: Playlist has been deleted
+        success: Playlist was deleted
+    playlist_videos:
+      create:
+        success: New videos were successfully added
+      update:
+        success: Videos were successfully reordered
+      destroy:
+        success: Videos were successfully deleted
+      error: New videos were not added (%{reason})
 
   confirm:
     playlist:

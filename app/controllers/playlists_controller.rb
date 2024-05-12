@@ -15,7 +15,7 @@ class PlaylistsController < ApplicationController
     if @playlist.save
       notice = t("flash.playlists.create.success")
       respond_to do |format|
-        format.html { redirect_to playlist_path(@playlist), notice: notice }
+        format.html { redirect_to @playlist, notice: notice }
       end
     else
       render :new, status: :unprocessable_entity
@@ -32,7 +32,7 @@ class PlaylistsController < ApplicationController
     if @playlist.update(playlist_params)
       notice = t("flash.playlists.update.success")
       respond_to do |format|
-        format.html { redirect_to playlist_path(@playlist), notice: notice }
+        format.html { redirect_to @playlist, notice: notice }
       end
     else
       render :edit, status: :unprocessable_entity
