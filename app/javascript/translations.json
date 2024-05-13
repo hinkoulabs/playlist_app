@@ -4,10 +4,10 @@
       "components": {
         "videos": {
           "VideoGallery": {
-            "loadedStatsPrefix": "Videos",
+            "loadedStatsPrefix": "Loaded Videos",
             "search_placeholder": "Search Videos",
             "select": {
-              "link": "Select Mode"
+              "link": "Select"
             },
             "failed_videos_load": "Failed to fetch videos"
           },

@@ -1,7 +1,7 @@
 module VideosConcern
   def get_videos(video_scope)
     page = params[:page].to_i > 0 ? params[:page].to_i : 1
-    per_page = Video::PER_PAGE
+    per_page = Setting.video_per_page
 
     records = video_scope.search(params[:q])
 

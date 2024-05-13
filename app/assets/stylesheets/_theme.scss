@@ -15,7 +15,6 @@ $primary-color: #012970;
 
 a, .btn-link{
   text-decoration: none;
-  //color: $primary-color;
 }
 
 
@@ -77,11 +76,15 @@ a, .btn-link{
     display: flex;
     align-items: center;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 400;
     color: $primary-color;
     background: #f6f9ff;
     padding: 10px 15px;
     border-radius: 4px;
+
+    &.active {
+      font-weight: 600;
+    }
 
     i {
       font-size: 16px;
