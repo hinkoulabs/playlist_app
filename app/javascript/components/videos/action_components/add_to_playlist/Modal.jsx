@@ -2,14 +2,14 @@ import React, {useState, useEffect} from 'react';
 import {Modal, Button, Form} from 'react-bootstrap';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import {getAllRecords, createRecords} from '../requests';
+import {getAllRecords, createRecords} from '../../../requests';
 import {useTranslation} from 'react-i18next';
-import notifier from "../../notifier";
+import notifier from "../../../../notifier";
 
 const animatedComponents = makeAnimated();
 
 const AddToPlaylistModal = ({show, onHide, selectedIds, onSubmit, playlistsUrl, addVideosToPlaylistsUrl}) => {
-    const {t} = useTranslation("translation", {keyPrefix: "components.videos.AddToPlaylistModal"});
+    const {t} = useTranslation("translation", {keyPrefix: "components.videos.action_components.add_to_playlist.Modal"});
 
     const [formMode, setFormMode] = useState(false);
 

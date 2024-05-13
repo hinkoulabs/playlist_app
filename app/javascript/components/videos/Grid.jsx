@@ -23,7 +23,9 @@ const GridItem = ({video, isSelected, selectModeEnabled, selectHandler}) => {
 
     return (
         <Col>
-            <Card className={`h-100 d-flex flex-column video-grid ${ selectModeEnabled ? 'cursor-pointer' : '' } ${isSelected ? 'bg-primary text-white' : ''}`} onClick={selectVideoHandler}>
+            <Card
+                className={`h-100 d-flex flex-column video-grid ${selectModeEnabled ? 'cursor-pointer' : ''} ${isSelected ? 'bg-primary text-white' : ''}`}
+                onClick={selectVideoHandler}>
                 <Card.Img variant="top" src={video.thumbnail_url} className="cover-image"/>
                 <Card.Body className="flex-grow-1">
                     <Card.Title>{video.title}</Card.Title>
@@ -40,11 +42,11 @@ const GridItem = ({video, isSelected, selectModeEnabled, selectHandler}) => {
                     </small>
                 </Card.Footer>
             </Card>
-            <VideoModal
+            {modalShow && <VideoModal
                 video={video}
-                show={modalShow}
+                show={true}
                 onHide={() => setModalShow(false)}
-            />
+            />}
         </Col>
     );
 };

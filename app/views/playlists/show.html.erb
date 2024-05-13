@@ -18,10 +18,10 @@
 
 <% if @playlist.videos.count > 0 %>
   <div
-    id="video-list"
+    id="playlist-video-list"
     data-videos-url="<%= playlist_url(@playlist, format: :json) %>"
-    data-playlists-url="<%= playlists_url(format: :json) %>"
-    data-add-videos-to-playlists-url="<%= playlist_videos_url(format: :json) %>"
+    data-reorder-videos-url="<%= playlist_video_url(@playlist, format: :json) %>"
+    data-delete-videos-url="<%= playlist_video_url(@playlist, format: :json) %>"
   ></div>
 <% else %>
   <%= render("show_hero") %>

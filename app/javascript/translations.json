@@ -2,29 +2,35 @@
   "en": {
     "translation": {
       "components": {
-        "Videos": {
-          "loadedStatsPrefix": "Videos",
-          "search_placeholder": "Search Videos",
-          "add_to_playlist": "Add To Playlist",
-          "select": {
-            "link": "Select Mode",
-            "deselect_confirmation": "Are you sure to reset mode? Selected items will be lost."
-          },
-          "failed_videos_load": "Failed to fetch videos"
-        },
         "videos": {
-          "AddToPlaylistModal": {
-            "title": "Add Videos to Playlist",
-            "add_button": "Add Videos",
-            "switch": "Or Add New Playlist",
-            "playlist_form": {
-              "placeholder": "Enter new playlist name"
+          "VideoGallery": {
+            "loadedStatsPrefix": "Videos",
+            "search_placeholder": "Search Videos",
+            "select": {
+              "link": "Select Mode",
+              "deselect_confirmation": "Are you sure to reset mode? Selected items will be lost."
             },
-            "playlist_select_box": {
-              "placeholder": "Search playlist"
-            },
-            "notifications": {
-              "added": "Videos were successfully added to the playlist"
+            "failed_videos_load": "Failed to fetch videos"
+          },
+          "action_components": {
+            "add_to_playlist": {
+              "Button": {
+                "title": "Add To Playlist"
+              },
+              "Modal": {
+                "title": "Add Videos to Playlist",
+                "add_button": "Add Videos",
+                "switch": "Or Add New Playlist",
+                "playlist_form": {
+                  "placeholder": "Enter new playlist name"
+                },
+                "playlist_select_box": {
+                  "placeholder": "Search playlist"
+                },
+                "notifications": {
+                  "added": "Videos were successfully added to the playlist"
+                }
+              }
             }
           }
         },
