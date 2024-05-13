@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import {useTranslation} from "react-i18next";
-const SearchInput = ({ handleFetch, placeholder, disabled }) => {
+const SearchInput = ({ onSearch, placeholder, disabled }) => {
     const {t} = useTranslation("translation", { keyPrefix: "components.shared.SearchInput" });
 
     const [query, setQuery] = useState('');
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
-            handleFetch(query);
-            // Send Axios request here
+            onSearch(query);
         }, 300)
 
         return () => clearTimeout(delayDebounceFn)

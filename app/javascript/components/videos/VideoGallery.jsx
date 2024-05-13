@@ -6,6 +6,7 @@ import InfiniteScroll from '../shared/InfiniteScroll';
 import SkeletonLoader from '../shared/SkeletonLoader';
 import EmptyResults from '../shared/EmptyResults';
 import LoadedStats from '../shared/LoadedStats';
+import SortableModeButton from "./SortableButton";
 import {getRecords} from '../requests';
 import {useTranslation} from 'react-i18next';
 import notifier from "../../notifier";
@@ -24,6 +25,7 @@ const VideoGallery = ({
     const [isLoading, setIsLoading] = useState(false);
     const [hasMore, setHasMore] = useState(false);
     const [selectModeEnabled, setSelectModeEnabled] = useState(false);
+    const [sortableModeEnabled, setSortableModeEnabled] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [page, setPage] = useState(1);
 
@@ -52,14 +54,14 @@ const VideoGallery = ({
         fetchVideos(page, searchQuery);
     };
 
-    const handleSearch = (q) => {
+    const onSearch = (q) => {
         setPage(1);
         setSearchQuery(q);
     };
 
-    const resetSelection = (deleted=false) => {
+    const resetSelection = (deleted = false) => {
         if (deleted) {
-            setVideos(videos => videos.filter( v => !selectedIds.includes(v.id) ))
+            setVideos(videos => videos.filter(v => !selectedIds.includes(v.id)))
         }
         setSelectModeEnabled(false);
         setSelectedIds([]);
@@ -67,23 +69,21 @@ const VideoGallery = ({
 
     const toggleSelectMode = () => {
         if (selectModeEnabled) {
-            if (selectedIds.length) {
-                if (confirm(t('select.deselect_confirmation'))) {
-                    resetSelection()
-                }
-            } else {
-                resetSelection()
-            }
+            resetSelection()
         } else {
             setSelectModeEnabled(true);
         }
     };
 
-    const selectHandler = (id) => {
+    const onSelect = (id) => {
         setSelectedIds(ids =>
             ids.includes(id) ? ids.filter(i => i !== id) : [...ids, id]
         );
     };
+
+    const onSortEnd = (videos) => {
+        setVideos(videos);
+    }
 
     const renderSelectActionButtons = () => {
         return selectActionComponents.map(
@@ -98,14 +98,19 @@ const VideoGallery = ({
         }
         return (
             <InfiniteScroll loadMore={handleLoadMore} hasMore={hasMore} isLoading={isLoading}>
-                <Grid videos={videos} selectModeEnabled={selectModeEnabled} selectedIds={selectedIds}
-                      selectHandler={selectHandler} />
+                <Grid videos={videos}
+                      selectModeEnabled={selectModeEnabled}
+                      selectedIds={selectedIds}
+                      onSelect={onSelect}
+                      sortableModeEnabled={sortableModeEnabled}
+                      onSortEnd={onSortEnd}
+                />
             </InfiniteScroll>
         );
     };
 
     if (!isLoading && !videos.length && !searchQuery && EmptyComponent) {
-        return <EmptyComponent />;
+        return <EmptyComponent/>;
     }
 
     return (
@@ -118,10 +123,18 @@ const VideoGallery = ({
                     {t("select.link")}
                 </Button>
                 {selectedIds.length > 0 && renderSelectActionButtons()}
+                {
+                    sortableUrl &&
+                    <SortableModeButton
+                        videos={videos}
+                        sortableUrl={sortableUrl}
+                        mode={sortableModeEnabled}
+                        onClick={() => setSortableModeEnabled(m => !m)}/>
+                }
                 <SearchInput
                     placeholder={t('search_placeholder')}
-                    disabled={selectModeEnabled}
-                    handleFetch={handleSearch}/>
+                    disabled={selectModeEnabled || sortableModeEnabled}
+                    onSearch={onSearch}/>
                 <LoadedStats prefix={t('loadedStatsPrefix')} loadedCount={videos.length} meta={videosMeta}/>
             </div>
             <div className="videos-scrollable-content">

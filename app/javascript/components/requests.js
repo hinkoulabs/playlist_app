@@ -58,14 +58,17 @@ export const getAllRecords = async (url, q) => {
     }
 };
 
+const buildSuccessResult = (response) => {
+    return {
+        status: true,
+        message: response.data.message
+    }
+}
+
 export const createRecords = async (url, payload) => {
     try {
         const response = await api.post(url, payload)
-
-        return {
-            status: true,
-            message: response.data.message
-        }
+        return buildSuccessResult(response);
     } catch (error) {
         return errorHandler(error)
     }
@@ -73,11 +76,8 @@ export const createRecords = async (url, payload) => {
 
 export const updateRecords = async (url, payload) => {
     try {
-        await api.patch(url, payload)
-
-        return {
-            status: true
-        }
+        const response = await api.patch(url, payload)
+        return buildSuccessResult(response);
     } catch (error) {
         return errorHandler(error)
     }
@@ -86,11 +86,7 @@ export const updateRecords = async (url, payload) => {
 export const deleteRecords = async (url, payload) => {
     try {
         const response = await api.delete(url, {data: payload})
-
-        return {
-            status: true,
-            message: response.data.message
-        }
+        return buildSuccessResult(response);
     } catch (error) {
         return errorHandler(error)
     }

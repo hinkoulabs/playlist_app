@@ -7,14 +7,18 @@
             "loadedStatsPrefix": "Videos",
             "search_placeholder": "Search Videos",
             "select": {
-              "link": "Select Mode",
-              "deselect_confirmation": "Are you sure to reset mode? Selected items will be lost."
+              "link": "Select Mode"
             },
             "failed_videos_load": "Failed to fetch videos"
           },
           "EmptyProjectVideos": {
             "title": "Videos are empty. Please add new videos.",
             "button": "Add Videos"
+          },
+          "SortableModeButton": {
+            "activeButton": "Reorder",
+            "saveButton": "Save",
+            "reorder_confirmation": "Are you sure to save ordering?"
           },
           "selectActions": {
             "addToPlaylist": {
