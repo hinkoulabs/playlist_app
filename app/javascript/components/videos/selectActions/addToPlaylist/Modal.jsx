@@ -9,7 +9,7 @@ import notifier from "../../../../notifier";
 const animatedComponents = makeAnimated();
 
 const AddToPlaylistModal = ({show, onHide, selectedIds, onSubmit, playlistsUrl, addVideosToPlaylistsUrl}) => {
-    const {t} = useTranslation("translation", {keyPrefix: "components.videos.action_components.add_to_playlist.Modal"});
+    const {t} = useTranslation("translation", {keyPrefix: "components.videos.selectActions.addToPlaylist.Modal"});
 
     const [formMode, setFormMode] = useState(false);
 
@@ -46,7 +46,7 @@ const AddToPlaylistModal = ({show, onHide, selectedIds, onSubmit, playlistsUrl, 
         const result = await createRecords(addVideosToPlaylistsUrl, payload);
 
         if (result.status) {
-            notifier("info", t('notifications.added'));
+            notifier("info", result.message);
             onSubmit();
             onHide();
         } else {

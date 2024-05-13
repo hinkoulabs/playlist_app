@@ -1,9 +1,9 @@
 import React from 'react';
 import VideoGallery from './videos/VideoGallery';
-import AddToPlaylistButton from './videos/action_components/add_to_playlist/Button';
+import AddToPlaylistButton from './videos/selectActions/addToPlaylist/Button';
 
 const Videos = ({videosUrl, playlistsUrl, addVideosToPlaylistsUrl}) => {
-    const actionComponents = [
+    const selectActionComponents = [
         {
             Component: AddToPlaylistButton,
             props: { playlistsUrl, addVideosToPlaylistsUrl }
@@ -13,7 +13,7 @@ const Videos = ({videosUrl, playlistsUrl, addVideosToPlaylistsUrl}) => {
     return (
         <VideoGallery
             videosUrl={videosUrl}
-            actionComponents={actionComponents}
+            selectActionComponents={selectActionComponents}
         />
     );
 };

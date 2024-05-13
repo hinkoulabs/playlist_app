@@ -24,7 +24,7 @@ document.addEventListener("turbo:load", () => {
             <PlaylistVideos
                 videosUrl={playlistVideoListRoot.dataset.videosUrl}
                 reorderVideosUrl={playlistVideoListRoot.dataset.reorderVideosUrl}
-                deleteVideosUrl={playlistVideoListRoot.dataset.deleteVideosUrl}
+                removeFromPlaylistUrl={playlistVideoListRoot.dataset.removeFromPlaylistUrl}
             />
         );
     }

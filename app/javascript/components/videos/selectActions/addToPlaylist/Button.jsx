@@ -4,7 +4,7 @@ import Modal from "./Modal"
 import {useTranslation} from 'react-i18next';
 
 const AddToPlaylistButton = ({playlistsUrl, addVideosToPlaylistsUrl, selectedIds, resetSelection}) => {
-    const {t} = useTranslation("translation", {keyPrefix: "components.videos.action_components.add_to_playlist.Button"});
+    const {t} = useTranslation("translation", {keyPrefix: "components.videos.selectActions.addToPlaylist.Button"});
     const [showModal, setShowModal] = useState(false);
 
     return <>

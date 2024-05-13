@@ -85,8 +85,6 @@ en:
   playlists:
     index:
       hero: Welcome to Playlist App. The place where you can create your custom playlists easily.
-    show:
-      hero: Welcome to playlist "%{name}" page. Videos are empty. Please add new videos.
     new:
       title: New Playlist
     edit:

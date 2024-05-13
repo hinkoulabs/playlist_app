@@ -60,10 +60,11 @@ export const getAllRecords = async (url, q) => {
 
 export const createRecords = async (url, payload) => {
     try {
-        await api.post(url, payload)
+        const response = await api.post(url, payload)
 
         return {
-            status: true
+            status: true,
+            message: response.data.message
         }
     } catch (error) {
         return errorHandler(error)
@@ -76,6 +77,19 @@ export const updateRecords = async (url, payload) => {
 
         return {
             status: true
+        }
+    } catch (error) {
+        return errorHandler(error)
+    }
+};
+
+export const deleteRecords = async (url, payload) => {
+    try {
+        const response = await api.delete(url, {data: payload})
+
+        return {
+            status: true,
+            message: response.data.message
         }
     } catch (error) {
         return errorHandler(error)

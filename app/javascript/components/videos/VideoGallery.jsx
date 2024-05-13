@@ -12,7 +12,8 @@ import notifier from "../../notifier";
 
 const VideoGallery = ({
                           videosUrl,
-                          actionComponents,
+                          selectActionComponents,
+                          EmptyComponent,
                           sortableUrl
                       }) => {
     const {t} = useTranslation("translation", {keyPrefix: "components.videos.VideoGallery"});
@@ -56,7 +57,10 @@ const VideoGallery = ({
         setSearchQuery(q);
     };
 
-    const resetSelection = () => {
+    const resetSelection = (deleted=false) => {
+        if (deleted) {
+            setVideos(videos => videos.filter( v => !selectedIds.includes(v.id) ))
+        }
         setSelectModeEnabled(false);
         setSelectedIds([]);
     }
@@ -81,8 +85,8 @@ const VideoGallery = ({
         );
     };
 
-    const renderActionButtons = () => {
-        return actionComponents.map(
+    const renderSelectActionButtons = () => {
+        return selectActionComponents.map(
             ({Component, props}, key) => {
                 return <Component {...props} key={key} selectedIds={selectedIds} resetSelection={resetSelection}/>
             });
@@ -100,6 +104,10 @@ const VideoGallery = ({
         );
     };
 
+    if (!isLoading && !videos.length && !searchQuery && EmptyComponent) {
+        return <EmptyComponent />;
+    }
+
     return (
         <div className="videos-container">
             <div className="videos-controls">
@@ -109,7 +117,7 @@ const VideoGallery = ({
                     onClick={toggleSelectMode}>
                     {t("select.link")}
                 </Button>
-                {selectedIds.length > 0 && renderActionButtons()}
+                {selectedIds.length > 0 && renderSelectActionButtons()}
                 <SearchInput
                     placeholder={t('search_placeholder')}
                     disabled={selectModeEnabled}

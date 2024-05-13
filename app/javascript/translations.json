@@ -12,8 +12,12 @@
             },
             "failed_videos_load": "Failed to fetch videos"
           },
-          "action_components": {
-            "add_to_playlist": {
+          "EmptyProjectVideos": {
+            "title": "Videos are empty. Please add new videos.",
+            "button": "Add Videos"
+          },
+          "selectActions": {
+            "addToPlaylist": {
               "Button": {
                 "title": "Add To Playlist"
               },
@@ -26,10 +30,13 @@
                 },
                 "playlist_select_box": {
                   "placeholder": "Search playlist"
-                },
-                "notifications": {
-                  "added": "Videos were successfully added to the playlist"
                 }
+              }
+            },
+            "removeFromPlaylist": {
+              "Button": {
+                "title": "Remove Videos",
+                "remove_confirmation": "Are you sure to remove selected videos from playlist?"
               }
             }
           }
