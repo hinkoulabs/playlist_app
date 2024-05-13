@@ -106,10 +106,10 @@ here: [Technical Specification](https://gist.github.com/sp2410/d34d7b75e8a3fb175
     - select videos (please active select mode on top left corner on view) and add selected videos to new or existing
       playlist
 
-   4. **Manage Playlists**
-       - Go to `http://localhost:3000/playlists` to get access to playlists.
+4. **Manage Playlists**
+    - Go to `http://localhost:3000/playlists` to get access to playlists.
 
-   The management is built using rails + turbo except playlist show page that is implemented using react.js. 
+   The management is built using RoR + turbo except playlist show page that is implemented using React.js. 
    Playlist show page has complex functionality that's why it's need to use react.
 
    Users are able to do the following actions on playlist show page:
