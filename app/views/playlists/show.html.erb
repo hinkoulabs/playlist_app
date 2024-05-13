@@ -1,0 +1,24 @@
+<%= content_for(:breadcrumbs) do %>
+  <% render("layouts/breadcrumbs/breadcrumbs",
+            links: [
+              { title: Playlist.model_name.human(count: 2), url: playlists_path },
+              { title: truncate_link_title(@playlist.name) }
+            ]) %>
+<% end %>
+
+<h3>
+  <%= @playlist.name %>
+  <%= link_to(edit_playlist_path(@playlist), class: 'header-link') do %>
+    <i class="bi bi-pencil"></i>
+  <% end %>
+  <%= link_to(playlist_path(@playlist), class: 'header-link text-danger', data: { turbo_method: :delete, turbo_confirm: t("confirm.playlist.delete") }) do %>
+    <i class="bi bi-trash"></i>
+  <% end %>
+</h3>
+
+<div
+  id="playlist-video-list"
+  data-videos-url="<%= playlist_url(@playlist, format: :json) %>"
+  data-reorder-videos-url="<%= playlist_video_url(@playlist, format: :json) %>"
+  data-remove-from-playlist-url="<%= playlist_video_url(@playlist, format: :json) %>"
+></div>

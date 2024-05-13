@@ -5,7 +5,6 @@
     <tr>
       <th scope="col"><%= FetchRequest.human_attribute_name("created_at") %></th>
       <th scope="col"><%= FetchRequest.human_attribute_name("status") %></th>
-      <th scope="col"><%= FetchRequest.human_attribute_name("url") %></th>
       <th scope="col"><%= FetchRequest.human_attribute_name("page") %></th>
       <th scope="col"></th>
     </tr>
@@ -15,7 +14,6 @@
       <tr>
         <td><%= request.created_at %></td>
         <td><%= request_status_badge(request.status) %></td>
-        <td><%= request.url %></td>
         <td><%= request.page %></td>
         <td>
           <% if request.error? %>

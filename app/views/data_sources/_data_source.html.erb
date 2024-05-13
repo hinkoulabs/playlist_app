@@ -2,12 +2,7 @@
   <h5 class="card-title"><%= data_source.class.human_attribute_name(:url) %></h5>
   <p class="card-text"><%= data_source.url %></p>
 
-  <h5 class="card-title"><%= data_source.class.human_attribute_name(:proxy) %></h5>
-  <p class="card-text"><%= boolean_badge(data_source.proxy?) %></p>
-
   <%= link_to t('actions.edit'), edit_data_source_path, class: "btn btn-primary" %>
-  <% if data_source.proxy? %>
-    <%= link_to t('actions.fetch_videos'), fetch_requests_path, class: "btn btn-primary", data: { turbo_method: :post, turbo_prefetch: false, turbo_frame: "_top" } %>
-    <%= link_to FetchRequest.model_name.human(count: 2), fetch_requests_path, class: "btn btn-primary", data: { turbo_prefetch: false, turbo_frame: "_top" } %>
-  <% end %>
+  <%= link_to t('actions.fetch_videos'), fetch_requests_path, class: "btn btn-primary", data: { turbo_method: :post, turbo_prefetch: false, turbo_frame: "_top" } %>
+  <%= link_to FetchRequest.model_name.human(count: 2), fetch_requests_path, class: "btn btn-primary", data: { turbo_prefetch: false, turbo_frame: "_top" } %>
 <% end %>

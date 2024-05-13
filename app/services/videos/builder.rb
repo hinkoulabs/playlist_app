@@ -1,18 +1,10 @@
 class Videos::Builder
-  def initialize(fetch_request)
-    @fetch_request = fetch_request
+  def initialize(data_source)
+    @data_source = data_source
   end
 
-  def call(videos)
-    save_videos(videos)
-  end
-
-  protected
-
-  def save_videos(videos)
-    videos.each do |attrs|
-      v = ::Video.find_or_initialize_by(external_id: attrs[:external_id], url: @fetch_request.url)
-      v.update(attrs)
-    end
+  def call(videos_attributes)
+    videos_attributes.each { |attrs| attrs[:data_source_id] =  @data_source.id }
+    Video.upsert_all(videos_attributes, unique_by: %i[external_id data_source_id])
   end
 end

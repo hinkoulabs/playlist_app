@@ -1,0 +1,67 @@
+.videos-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px); /* Ensure this element takes full height of its container */
+}
+
+.videos-controls {
+  padding: 10px;
+  background: #f8f9fa; /* A light grey background */
+}
+
+.videos-scrollable-content {
+  flex-grow: 1; /* Takes up all available space */
+  overflow-y: auto; /* Enables vertical scroll */
+  padding: 10px;
+}
+
+.text-ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.video-list {
+  overflow-y: auto;
+
+  .video-image {
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .video-description {
+    margin-bottom: 0;
+  }
+}
+
+.video-grid {
+  .cover-image {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .read-more{
+    text-wrap: nowrap;
+    cursor: pointer;
+  }
+}
+
+.responsive-modal {
+  .modal-body-header{
+    text-align: center;
+    margin-bottom: 20px;
+
+    img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+    }
+  }
+
+  .modal-body-description{
+    max-height: 200px;
+    overflow-y: auto;
+  }
+}

@@ -13,5 +13,9 @@ class Setting < RailsSettings::Base
     scope :jobs do
       field :active_jobs_limit, type: :integer, default: 100
     end
+
+    scope :pagination do
+      field :video_per_page, type: :integer, default: 20
+    end
   end
 end

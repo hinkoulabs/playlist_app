@@ -1,9 +1,9 @@
 <% flash.each do |flash_type, message| %>
   <div
     class="flash__message <%= flash_type_classes(flash_type) %>"
-    data-controller="removals"
-    data-action="animationend->removals#remove"
+    data-controller="flash"
+    data-flash-type="<%= flash_type %>"
+    data-flash-message="<%= message %>"
   >
-    <%= message %>
   </div>
 <% end %>

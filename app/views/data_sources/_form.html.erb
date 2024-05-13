@@ -1,6 +1,5 @@
 <%= simple_form_for data_source, url: data_source_path, method: :put do |f| %>
   <%= f.input :url %>
-  <%= f.input :proxy %>
   <%= f.button :submit, t("helpers.submit.update"), class: 'btn btn-primary mx-1' %>
   <%= link_to t("actions.cancel"), setting_path, class: 'btn btn-secondary' %>
 <% end %>

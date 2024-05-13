@@ -40,6 +40,9 @@ en:
       fetch_request:
         one: Fetch Request
         other: Fetch Requests
+      playlist:
+        one: Playlist
+        other: Playlists
     attributes:
       data_source:
         url: "Url"
@@ -50,7 +53,8 @@ en:
         url: "URL"
         log: "Log"
         page: "Page"
-
+      playlist:
+        name: Name
   helpers:
     no_data: No Data
     submit:
@@ -58,11 +62,15 @@ en:
       update: "Update"
 
   actions:
+    add: Add
     edit: Edit
     cancel: Cancel
     close: Close
     fetch_videos: Fetch Videos
     restart: Restart
+    delete: Delete
+    create_playlist: Create Playlist
+    add_videos: Add Videos
 
   setting:
     show:
@@ -74,7 +82,13 @@ en:
   data_source:
     edit:
       title: Edit Datasource
-
+  playlists:
+    index:
+      hero: Welcome to Playlist App. The place where you can create your custom playlists easily.
+    new:
+      title: New Playlist
+    edit:
+      title: Edit Playlist
   badges:
     true: TRUE
     false: FALSE
@@ -83,15 +97,35 @@ en:
     data_source:
       update:
         success: Data source was successfully updated
-        error: Data source was failed to save
+        error: Data source has not been updated
     fetch_requests:
       create:
-        success: Request has been created. Videos will be uploaded soon
-        error: Request has been rejected (%{reason})
+        success: Request was created. Videos will be uploaded soon
+        error: Request was rejected (%{reason})
       update:
         success: Request will be processed soon
-        error: Request has been rejected (%{reason})
+        error: Request was rejected (%{reason})
+    playlists:
+      create:
+        success: Playlist was created
+        error: Playlist was not created (%{reason})
+      update:
+        success: Playlist was updated
+        error: Playlist was not updated (%{reason})
+      destroy:
+        success: Playlist was deleted
+    playlist_videos:
+      create:
+        success: New videos were successfully added
+      update:
+        success: Videos were successfully reordered
+      destroy:
+        success: Videos were successfully deleted
+      error: New videos were not added (%{reason})
 
+  confirm:
+    playlist:
+      delete: Are you sure you want to delete the playlist?
   fetch_requests:
     statuses:
       processing: Processing

@@ -8,18 +8,18 @@ first:
   id: 1
   status: 1
   finished_at: <%= 5.day.ago %>
-  url: http://localhost:5000/videos
+  data_source_id: 1
   page: 1
 
 error:
   id: 2
   status: 2
   finished_at: <%= 4.day.ago %>
-  url: http://localhost:5000/videos
+  data_source_id: 1
   page: 1
 
 active:
   id: 3
   status: 0
-  url: http://localhost:5000/videos
+  data_source_id: 1
   page: 1

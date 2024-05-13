@@ -1,0 +1,74 @@
+{
+  "en": {
+    "translation": {
+      "components": {
+        "videos": {
+          "VideoGallery": {
+            "loadedStatsPrefix": "Loaded Videos",
+            "search_placeholder": "Search Videos",
+            "select": {
+              "link": "Select"
+            },
+            "failed_videos_load": "Failed to fetch videos"
+          },
+          "EmptyProjectVideos": {
+            "title": "Videos are empty. Please add new videos.",
+            "button": "Add Videos"
+          },
+          "SortableModeButton": {
+            "activeButton": "Reorder",
+            "saveButton": "Save",
+            "reorder_confirmation": "Are you sure to save ordering?"
+          },
+          "selectActions": {
+            "addToPlaylist": {
+              "Button": {
+                "title": "Add To Playlist"
+              },
+              "Modal": {
+                "title": "Add Videos to Playlist",
+                "add_button": "Add Videos",
+                "switch": "Or Add New Playlist",
+                "playlist_form": {
+                  "placeholder": "Enter new playlist name"
+                },
+                "playlist_select_box": {
+                  "placeholder": "Search playlist"
+                }
+              }
+            },
+            "removeFromPlaylist": {
+              "Button": {
+                "title": "Remove Videos",
+                "remove_confirmation": "Are you sure to remove selected videos from playlist?"
+              }
+            }
+          }
+        },
+        "shared": {
+          "EmptyResults": {
+            "message": "Sorry, we couldn't find any results.",
+            "no_data": "No Data Found"
+          },
+          "InfiniteScroll": {
+            "loading_more": "Loading more ..."
+          },
+          "SearchInput": {
+            "placeholder": "Search"
+          },
+          "ViewModeSelector": {
+            "grid": "Grid View",
+            "list": "List View"
+          },
+          "LoadedStats": {
+            "total_count": "{{ prefix }}: {{ loadedCount }} / {{ totalCount }}"
+          }
+        }
+      },
+      "video": {
+        "view_count": "View Count: {{count}}",
+        "read_more": "Read More"
+      }
+    }
+  }
+}

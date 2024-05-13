@@ -1,0 +1,37 @@
+<% if @playlists.size > 0 %>
+  <%= content_for(:breadcrumbs) do %>
+    <% render("layouts/breadcrumbs/breadcrumbs", links: [{ title: Playlist.model_name.human(count: 2) }]) %>
+  <% end %>
+
+  <h3><%= Playlist.model_name.human(count: 2) %></h3>
+
+  <%= link_to(t("actions.add"), new_playlist_path, class: "btn btn-primary my-2") %>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th scope="col"><%= Playlist.human_attribute_name("name") %></th>
+        <th scope="col"><%= Playlist.human_attribute_name("created_at") %></th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @playlists.each do |playlist| %>
+        <tr>
+          <td><%= link_to(playlist.name, playlist_path(playlist)) %></td>
+          <td><%= playlist.created_at %></td>
+          <td>
+            <%= link_to(t("actions.edit"), edit_playlist_path(playlist),  class: "btn btn-primary btn-sm") %>
+            <%= link_to(t("actions.delete"), playlist_path(playlist), data: { turbo_method: :delete, turbo_confirm: t("confirm.playlist.delete") },  class: "btn btn-danger btn-sm") %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
+<% else %>
+  <%= render("index_hero") %>
+<% end %>

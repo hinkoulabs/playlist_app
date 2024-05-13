@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   resource :setting, only: [:show]
   resource :data_source, only: [:edit, :update]
 
-  resource :videos, only: [:index]
+  resources :videos, only: [:index]
+  resources :playlists
+  resources :playlist_videos, only: [:create, :update, :destroy]
 
   resources :fetch_requests, only: [:index, :create, :update]
 

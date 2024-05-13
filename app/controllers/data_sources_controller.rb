@@ -19,6 +19,6 @@ class DataSourcesController < ApplicationController
   private
 
   def data_source_params
-    params.require(:data_source).permit(:url, :proxy)
+    params.require(:data_source).permit(:url)
   end
 end

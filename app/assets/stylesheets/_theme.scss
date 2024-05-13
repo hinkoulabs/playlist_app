@@ -4,16 +4,19 @@ $primary-color: #012970;
   margin-top: 60px;
   padding: 20px 30px;
   transition: all 0.3s;
+
+  height: calc(100vh - 60px);
+  overflow-y: auto;
 }
 
 .page-title {
   margin-bottom: 10px;
 }
 
-a {
+a, .btn-link{
   text-decoration: none;
-  color: $primary-color;
 }
+
 
 .header {
   transition: all 0.5s;
@@ -73,11 +76,15 @@ a {
     display: flex;
     align-items: center;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 400;
     color: $primary-color;
     background: #f6f9ff;
     padding: 10px 15px;
     border-radius: 4px;
+
+    &.active {
+      font-weight: 600;
+    }
 
     i {
       font-size: 16px;
@@ -113,11 +120,21 @@ a {
   }
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
+
 #fetch-request-log {
   .modal-body{
     padding: 20px;
     max-height: 400px;
   }
+}
+
+.header-link {
+  font-size: large;
+  margin: 2px;
+  vertical-align: middle;
 }
 
 @media (min-width: 1200px) {

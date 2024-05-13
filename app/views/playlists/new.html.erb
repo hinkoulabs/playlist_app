@@ -1,0 +1,7 @@
+<%= content_for(:breadcrumbs) do %>
+  <% render("layouts/breadcrumbs/breadcrumbs", links: [{ title: Playlist.model_name.human(count: 2), url: playlists_path }, { title: t('playlists.new.title')  }]) %>
+<% end %>
+
+<h3><%= t('playlists.new.title') %></h3>
+
+<%= render 'form', back_url: playlists_path %>

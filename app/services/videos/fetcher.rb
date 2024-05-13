@@ -5,7 +5,7 @@ class Videos::Fetcher
 
   def call(data_source, started_at = Time.current)
     process do
-      FetchRequest.create(url: data_source.url, page: @adapter.default_page, created_at: started_at)
+      data_source.fetch_requests.create(page: @adapter.default_page, created_at: started_at)
     end
   end
 

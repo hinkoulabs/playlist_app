@@ -4,8 +4,47 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+video_001:
+  id: 1
+  title: "thanks for 5 million"
+  view_count: 279357
+  description: "#shorts"
+  thumbnail_url: "https://thumbnail_url.com/1.jpg"
+  external_id: 'external_1'
+  data_source_id: 1
+
+video_002:
+  id: 2
+  title: "Game Theory"
+  view_count: 33565
+  description: "#Game Theory"
+  thumbnail_url: "https://thumbnail_url.com/2.jpg"
+  external_id: '1'
+  data_source_id: 1
+
+video_003:
+  id: 3
+  title: "EUPHORIA"
+  view_count: 43456
+  description: "#Game Theory"
+  thumbnail_url: "https://thumbnail_url.com/3.jpg"
+  external_id: '20'
+  data_source_id: 1
+
+video_004:
+  id: 4
+  title: "Request Accepted!"
+  view_count: 66456
+  description: "My new request"
+  thumbnail_url: "https://thumbnail_url.com/4.jpg"
+  external_id: '3'
+  data_source_id: 1
+
+video_005:
+  id: 5
+  title: "EUPHORIA"
+  view_count: 43456
+  description: "#Game Theory"
+  thumbnail_url: "https://thumbnail_url.com/3.jpg"
+  external_id: '21'
+  data_source_id: 2
