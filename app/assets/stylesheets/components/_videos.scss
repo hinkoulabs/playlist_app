@@ -1,17 +1,18 @@
 .videos-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 100px); /* Ensure this element takes full height of its container */
+  /* ensure this element takes full height of its container */
+  height: calc(100vh - 150px);
 }
 
 .videos-controls {
   padding: 10px;
-  background: #f8f9fa; /* A light grey background */
+  background: #f8f9fa;
 }
 
 .videos-scrollable-content {
-  flex-grow: 1; /* Takes up all available space */
-  overflow-y: auto; /* Enables vertical scroll */
+  flex-grow: 1;
+  overflow-y: auto;
   padding: 10px;
 }
 
