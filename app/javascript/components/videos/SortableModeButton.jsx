@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {updateRecords} from '../requests';
 import notifier from "../../notifier";
 
-const SortableModeButton = ({mode, onClick, videos, sortableUrl}) => {
+const SortableModeButton = ({mode, disabled, onClick, videos, sortableUrl}) => {
     const {t} = useTranslation("translation", {keyPrefix: "components.videos.SortableModeButton"});
 
     const onSave = async () => {
@@ -13,7 +13,7 @@ const SortableModeButton = ({mode, onClick, videos, sortableUrl}) => {
 
             if (result.status) {
                 notifier("info", result.message);
-                onClick();
+                onClick(true);
             } else {
                 if (result.error) {
                     notifier("error", result.error);
@@ -23,8 +23,8 @@ const SortableModeButton = ({mode, onClick, videos, sortableUrl}) => {
     }
 
     return <>
-        <Button variant={mode ? "primary" : "secondary"} className="float-end my-2 position-relative" onClick={onClick}>
-            {t("activeButton")}
+        <Button disabled={disabled} variant={mode ? "primary" : "secondary"} className="float-end my-2 position-relative" onClick={() => onClick()}>
+            {mode ? t("active_button") : t("inactive_button")}
         </Button>
         {mode && <Button variant="success" className="float-end my-2 mx-1 position-relative" onClick={onSave}>
             {t("saveButton")}

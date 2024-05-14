@@ -60,6 +60,10 @@ const AddToPlaylistModal = ({show, onHide, selectedIds, onSubmit, playlistsUrl, 
         }
     };
 
+    const onChangeMode = () => {
+        setFormMode(v => !v)
+    }
+
     return (
         <Modal show={show} onHide={onHide} centered>
             <Modal.Header closeButton>
@@ -86,9 +90,9 @@ const AddToPlaylistModal = ({show, onHide, selectedIds, onSubmit, playlistsUrl, 
                             <Form.Control
                                 type="text"
                                 placeholder={t("playlist_form.placeholder")}
-                                defaultValue={ formData.name }
+                                defaultValue={formData.name}
                                 onChange={
-                                    (event) => setFormData( d => ({ ...d, name: event.target.value } ))
+                                    (event) => setFormData(d => ({...d, name: event.target.value}))
                                 }
                                 isInvalid={!!formErrors.name}
                             />
@@ -103,16 +107,17 @@ const AddToPlaylistModal = ({show, onHide, selectedIds, onSubmit, playlistsUrl, 
                         <Form.Check
                             type="switch"
                             checked={formMode}
-                            label={t('switch')}
-                            onChange={() => {
-                                setFormMode(v => !v)
-                            }}
+                            onChange={onChangeMode}
                         />
+                        <Form.Label onClick={onChangeMode}>
+                            {t('switch')}
+                        </Form.Label>
                     </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={handleSubmit} disabled={ formMode ? !formData.name : !formData.playlist }>
+                <Button variant="primary" onClick={handleSubmit}
+                        disabled={formMode ? !formData.name : !formData.playlist}>
                     {t('add_button')}
                 </Button>
             </Modal.Footer>

@@ -17,8 +17,8 @@
         <td><%= request.page %></td>
         <td>
           <% if request.error? %>
-            <%= link_to(FetchRequest.human_attribute_name("log"), '#', class: 'btn btn-sm btn-primary', data: { controller:"modal", action: "modal#show", modal_id_param: 'fetch-request-log', modal_body_param: request.log }) %>
-            <%= link_to(t('actions.restart'), fetch_request_path(request), class: 'btn btn-sm btn-primary', data: { turbo_method: :put } ) %>
+            <%= link_to(FetchRequest.human_attribute_name("log"), '#', class: 'btn btn-sm btn-primary my-1', data: { controller:"modal", action: "modal#show", modal_id_param: 'fetch-request-log', modal_body_param: request.log }) %>
+            <%= link_to(t('actions.restart'), fetch_request_path(request), class: 'btn btn-sm btn-primary my-1', data: { turbo_method: :put } ) %>
           <% end %>
         </td>
       </tr>

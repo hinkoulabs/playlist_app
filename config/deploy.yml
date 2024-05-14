@@ -45,23 +45,23 @@ registry:
   # Always use an access token rather than real password when possible.
   password:
     - KAMAL_REGISTRY_PASSWORD
-
 # Inject ENV variables into containers (secrets come from .env).
 env:
   clear:
     RAILS_SERVE_STATIC_FILES: true
     RAILS_LOG_TO_STDOUT: true
+    POSTGRES_HOST: 167.235.62.53
+    POSTGRES_PORT: 5432
+    REDIS_URL: redis://167.235.62.53:6379/
   secret:
     - RAILS_MASTER_KEY
-    - REDIS_URL
-    - POSTGRES_HOST
-    - POSTGRES_PORT
     - POSTGRES_DB
     - POSTGRES_USER
+    - POSTGRES_PASSWORD
 
 accessories:
   db:
-    image: postgres:16
+    image: postgres:14.2-alpine
     host: playlist-app.hinkoulabs.com
     port: 5432
     env:

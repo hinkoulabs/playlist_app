@@ -2,11 +2,11 @@ $primary-color: #012970;
 
 #main {
   margin-top: 60px;
-  padding: 20px 30px;
+  padding: 0 30px;
   transition: all 0.3s;
 
-  height: calc(100vh - 60px);
-  overflow-y: auto;
+  height: calc(100vh - 70px);
+  overflow-y: hidden;
 }
 
 .page-title {
@@ -137,6 +137,12 @@ a, .btn-link{
   vertical-align: middle;
 }
 
+.modal-dialog{
+  .form-switch {
+    display: inline-block;
+  }
+}
+
 @media (min-width: 1200px) {
   #main {
     margin-left: 300px;
@@ -156,7 +162,7 @@ a, .btn-link{
 
 @media (max-width: 1199px) {
   #main {
-    padding: 20px;
+    padding: 0 20px;
   }
 
   .sidebar {

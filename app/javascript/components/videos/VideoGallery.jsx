@@ -6,10 +6,11 @@ import InfiniteScroll from '../shared/InfiniteScroll';
 import SkeletonLoader from '../shared/SkeletonLoader';
 import EmptyResults from '../shared/EmptyResults';
 import LoadedStats from '../shared/LoadedStats';
-import SortableModeButton from "./SortableButton";
+import SortableModeButton from "./SortableModeButton";
 import {getRecords} from '../requests';
 import {useTranslation} from 'react-i18next';
 import notifier from "../../notifier";
+import { clone } from 'lodash'
 
 const VideoGallery = ({
                           videosUrl,
@@ -20,10 +21,12 @@ const VideoGallery = ({
     const {t} = useTranslation("translation", {keyPrefix: "components.videos.VideoGallery"});
 
     const [videos, setVideos] = useState([]);
+    const [videosBackup, setVideosBackup] = useState([]);
     const [videosMeta, setVideosMeta] = useState(null);
     const [selectedIds, setSelectedIds] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [hasMore, setHasMore] = useState(false);
+    const [actionLock, setActionLock] = useState(null)
     const [selectModeEnabled, setSelectModeEnabled] = useState(false);
     const [sortableModeEnabled, setSortableModeEnabled] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
@@ -33,6 +36,14 @@ const VideoGallery = ({
         setIsLoading(true);
         fetchVideos(1, searchQuery);
     }, [videosUrl, searchQuery]);
+
+    useEffect(() => {
+        if (actionLock === 'sort') {
+            const backup = clone(videos);
+            setVideosBackup(backup);
+        }
+
+    }, [actionLock])
 
     const fetchVideos = async (pageNum, query) => {
         setIsLoading(true);
@@ -63,6 +74,7 @@ const VideoGallery = ({
         if (deleted) {
             setVideos(videos => videos.filter(v => !selectedIds.includes(v.id)))
         }
+        setActionLock(null);
         setSelectModeEnabled(false);
         setSelectedIds([]);
     }
@@ -71,7 +83,27 @@ const VideoGallery = ({
         if (selectModeEnabled) {
             resetSelection()
         } else {
+            if (actionLock) return;
             setSelectModeEnabled(true);
+            setActionLock('select');
+        }
+    };
+
+    const toggleOrderMode = (saved = false) => {
+        if (sortableModeEnabled) {
+            setSortableModeEnabled(false);
+            setActionLock(null);
+
+            // revert ordering if it's not saved
+            if (!saved) {
+                setVideos(videosBackup);
+                setVideosBackup([]);
+            }
+
+        }else{
+            if (actionLock) return;
+            setSortableModeEnabled(true);
+            setActionLock('sort');
         }
     };
 
@@ -99,10 +131,9 @@ const VideoGallery = ({
         return (
             <InfiniteScroll loadMore={handleLoadMore} hasMore={hasMore} isLoading={isLoading}>
                 <Grid videos={videos}
-                      selectModeEnabled={selectModeEnabled}
                       selectedIds={selectedIds}
                       onSelect={onSelect}
-                      sortableModeEnabled={sortableModeEnabled}
+                      action={actionLock}
                       onSortEnd={onSortEnd}
                 />
             </InfiniteScroll>
@@ -119,21 +150,24 @@ const VideoGallery = ({
                 <Button
                     variant={selectModeEnabled ? "primary" : "secondary"}
                     className="float-start my-2"
+                    disabled={actionLock && actionLock !== 'select'}
                     onClick={toggleSelectMode}>
-                    {t("select.link")}
+                    {selectModeEnabled ? t("select.active") : t("select.inactive")}
                 </Button>
                 {selectedIds.length > 0 && renderSelectActionButtons()}
                 {
                     sortableUrl &&
                     <SortableModeButton
                         videos={videos}
+                        videosBackup={videosBackup}
+                        disabled={actionLock && actionLock !== 'sort'}
                         sortableUrl={sortableUrl}
                         mode={sortableModeEnabled}
-                        onClick={() => setSortableModeEnabled(m => !m)}/>
+                        onClick={toggleOrderMode}/>
                 }
                 <SearchInput
                     placeholder={t('search_placeholder')}
-                    disabled={selectModeEnabled || sortableModeEnabled}
+                    disabled={actionLock}
                     onSearch={onSearch}/>
                 <LoadedStats prefix={t('loadedStatsPrefix')} loadedCount={videos.length} meta={videosMeta}/>
             </div>

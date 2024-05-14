@@ -7,7 +7,8 @@
             "loadedStatsPrefix": "Loaded Videos",
             "search_placeholder": "Search Videos",
             "select": {
-              "link": "Select"
+              "inactive": "Select",
+              "active": "Cancel Select"
             },
             "failed_videos_load": "Failed to fetch videos"
           },
@@ -16,7 +17,8 @@
             "button": "Add Videos"
           },
           "SortableModeButton": {
-            "activeButton": "Reorder",
+            "active_button": "Cancel Reorder",
+            "inactive_button": "Reorder",
             "saveButton": "Save",
             "reorder_confirmation": "Are you sure to save ordering?"
           },

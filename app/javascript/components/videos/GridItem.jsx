@@ -5,19 +5,33 @@ import {useTranslation} from "react-i18next";
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 
-const GridItem = ({video, isSelected, selectModeEnabled, onSelect}) => {
+const GridItem = ({video, isSelected, action, onSelect}) => {
     const {
         attributes,
         listeners,
         setNodeRef,
         transform,
         transition,
+        isDragging
     } = useSortable({id: video.id});
 
-    const style = {
-        transform: CSS.Transform.toString(transform),
-        transition,
-    };
+    let sortableProps = {}
+
+    if (action === 'sort'){
+        const style = {
+            transform: CSS.Transform.toString(transform),
+            transition
+        };
+
+        // fix for tablets according https://docs.dndkit.com/api-documentation/sensors/pointer#recommendations
+        if (isDragging) {
+            style.touchAction = 'none'
+        }
+
+        sortableProps = { ref: setNodeRef, style: style, ...attributes, ...listeners }
+    }
+
+    const isSelectable = action === 'select';
 
     const {t} = useTranslation();
 
@@ -26,7 +40,7 @@ const GridItem = ({video, isSelected, selectModeEnabled, onSelect}) => {
     const description = video.description || "";
 
     const itemOnSelect = () => {
-        if (selectModeEnabled) {
+        if (isSelectable) {
             onSelect(video.id)
         }
     }
@@ -37,9 +51,9 @@ const GridItem = ({video, isSelected, selectModeEnabled, onSelect}) => {
     }
 
     return (
-        <Col ref={setNodeRef} style={style} {...attributes} {...listeners}>
+        <Col {...sortableProps}>
             <Card
-                className={`h-100 d-flex flex-column video-grid ${selectModeEnabled ? 'cursor-pointer' : ''} ${isSelected ? 'bg-primary text-white' : ''}`}
+                className={`h-100 d-flex flex-column video-grid ${isSelectable ? 'cursor-pointer' : ''} ${isSelected ? 'bg-primary text-white' : ''}`}
                 onClick={itemOnSelect}
             >
                 <Card.Img variant="top" src={video.thumbnail_url} className="cover-image"/>

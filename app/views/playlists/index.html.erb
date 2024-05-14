@@ -22,8 +22,8 @@
           <td><%= link_to(playlist.name, playlist_path(playlist)) %></td>
           <td><%= playlist.created_at %></td>
           <td>
-            <%= link_to(t("actions.edit"), edit_playlist_path(playlist),  class: "btn btn-primary btn-sm") %>
-            <%= link_to(t("actions.delete"), playlist_path(playlist), data: { turbo_method: :delete, turbo_confirm: t("confirm.playlist.delete") },  class: "btn btn-danger btn-sm") %>
+            <%= link_to(t("actions.edit"), edit_playlist_path(playlist),  class: "btn btn-primary btn-sm my-1") %>
+            <%= link_to(t("actions.delete"), playlist_path(playlist), data: { turbo_method: :delete, turbo_confirm: t("confirm.playlist.delete") },  class: "btn btn-danger btn-sm my-1") %>
           </td>
         </tr>
       <% end %>

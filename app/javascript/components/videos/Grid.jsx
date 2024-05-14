@@ -8,10 +8,10 @@ import {
 import {
     arrayMove,
     SortableContext,
-    rectSwappingStrategy
+    rectSortingStrategy
 } from '@dnd-kit/sortable';
 
-const Grid = ({videos, selectedIds, selectModeEnabled, sortableModeEnabled, onSelect, onSortEnd}) => {
+const Grid = ({videos, selectedIds, action, onSelect, onSortEnd}) => {
     const handleDragEnd = (event) => {
         const {active, over} = event;
 
@@ -32,20 +32,20 @@ const Grid = ({videos, selectedIds, selectModeEnabled, sortableModeEnabled, onSe
                 key={video.id}
                 video={video}
                 isSelected={isSelected}
-                selectModeEnabled={selectModeEnabled}
+                action={action}
                 onSelect={onSelect}
             />
         })}
     </Row>;
 
-    if (sortableModeEnabled) {
+    if (action === 'sort') {
         return <DndContext
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
         >
             <SortableContext
                 items={videos}
-                strategy={rectSwappingStrategy}
+                strategy={rectSortingStrategy}
             >
                 {items}
             </SortableContext>
