@@ -1,5 +1,4 @@
 web: env RUBY_DEBUG_OPEN=true bin/rails s
 js: yarn build --watch
 css: yarn watch:css
-redis: redis-server
 sidekiq: sidekiq -C config/sidekiq.yml

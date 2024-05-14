@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_05_12_160424) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "data_sources", force: :cascade do |t|
     t.string "url"
     t.boolean "proxy"
@@ -26,13 +29,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_160424) do
     t.integer "page"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "data_source_id"
+    t.bigint "data_source_id"
     t.index ["data_source_id"], name: "index_fetch_requests_on_data_source_id"
   end
 
   create_table "playlist_videos", force: :cascade do |t|
-    t.integer "playlist_id"
-    t.integer "video_id"
+    t.bigint "playlist_id"
+    t.bigint "video_id"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -64,10 +67,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_160424) do
     t.string "external_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "data_source_id"
+    t.bigint "data_source_id"
     t.index ["data_source_id"], name: "index_videos_on_data_source_id"
     t.index ["external_id", "data_source_id"], name: "index_videos_on_external_id_and_data_source_id", unique: true
-    t.index ["external_id"], name: "index_videos_on_external_id_and_url"
   end
 
 end

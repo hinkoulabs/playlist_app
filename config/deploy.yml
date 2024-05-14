@@ -1,0 +1,79 @@
+# Name of your application. Used to uniquely configure containers.
+service: playlist-app
+
+# Name of the container image.
+image: hinkoulabs/playlist-app
+
+traefik:
+  options:
+    publish:
+      - "443:443"
+    volume:
+      - "/letsencrypt/acme.json:/letsencrypt/acme.json"
+  args:
+    entryPoints.web.address: ":80"
+    entryPoints.websecure.address: ":443"
+    entryPoints.web.http.redirections.entryPoint.to: websecure
+    entryPoints.web.http.redirections.entryPoint.scheme: https
+    entryPoints.web.http.redirections.entrypoint.permanent: true
+    certificatesResolvers.letsencrypt.acme.email: "support@hinkoulabs.com"
+    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
+    certificatesResolvers.letsencrypt.acme.httpchallenge: true
+    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
+
+# Deploy to these servers.
+servers:
+  web:
+    hosts:
+      - playlist-app.hinkoulabs.com
+    labels:
+      traefik.http.routers.lexigym.rule: Host(`playlist-app.hinkoulabs.com`)
+      traefik.http.routers.lexigym_secure.entrypoints: websecure
+      traefik.http.routers.lexigym_secure.rule: Host(`playlist-app.hinkoulabs.com`)
+      traefik.http.routers.lexigym_secure.tls: true
+      traefik.http.routers.lexigym_secure.tls.certresolver: letsencrypt
+  worker:
+    hosts:
+      - playlist-app.hinkoulabs.com
+    cmd: bundle exec sidekiq -C config/sidekiq.yml
+# Credentials for your image host.
+registry:
+  # Specify the registry server, if you're not using Docker Hub
+  # server: registry.digitalocean.com / ghcr.io / ...
+  username: hinkoulabs
+
+  # Always use an access token rather than real password when possible.
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+# Inject ENV variables into containers (secrets come from .env).
+env:
+  clear:
+    RAILS_SERVE_STATIC_FILES: true
+    RAILS_LOG_TO_STDOUT: true
+  secret:
+    - RAILS_MASTER_KEY
+    - REDIS_URL
+    - POSTGRES_HOST
+    - POSTGRES_PORT
+    - POSTGRES_DB
+    - POSTGRES_USER
+
+accessories:
+  db:
+    image: postgres:16
+    host: playlist-app.hinkoulabs.com
+    port: 5432
+    env:
+      secret:
+        - POSTGRES_DB
+        - POSTGRES_USER
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
+  redis:
+    image: redis:7.2
+    host: playlist-app.hinkoulabs.com
+    port: 6379
+    directories:
+      - data:/data

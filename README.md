@@ -6,7 +6,6 @@
 - [Initial Setup](#initial-setup)
     - [Prerequisites](#prerequisites)
     - [Installation Steps](#installation-steps)
-    - [Running the Application Locally](#running-the-application-locally)
 - [Project Description](#project-description)
 - [Local Usage](#local-usage)
 - [Testing](#testing)
@@ -14,8 +13,8 @@
 
 ## Introduction
 
-The Playlist App is a playlist management system designed to integrate a variety of front-end libraries
-with a Ruby on Rails backend. It provides a responsive user interface that is compatible with both tablets and mobile
+The Playlist App is a playlist management system designed to fetch videos from external endpoint and provide
+access to playlist management. It provides a responsive user interface that is compatible with both tablets and mobile
 phones. The application facilitates complex UI functionalities through its integration of multiple libraries,
 demonstrating a sophisticated engineering solution.
 
@@ -24,7 +23,7 @@ demonstrating a sophisticated engineering solution.
 ### Prerequisites
 
 - Ruby version 3.2.2
-- Redis server (required for Sidekiq)
+- Docker (is used to install external services: Redis-Server and PostgreSQL)
 - Node.js with npm
 
 ### Installation Steps
@@ -41,24 +40,28 @@ bundle install
 npm install
 ```
 
-3. **Database Setup**
+3. **Run external services**
+
+```bash
+docker-compose up -d
+```
+
+Please use command bellow to down service when you don't need it
+
+```bash
+docker-compose down
+```
+
+4. **Database Setup**
 
 ```bash
 rails db:create
 rails db:migrate
-```   
-
-### Running the Application Locally
-
-Execute the following command to start the development server along with Sidekiq workers and the Redis server:
-
-```bash
-bin/dev
 ```
 
 ## Project Description
 
-This application is built using Ruby on Rails 7.1, esbuild, and SQLite, with a front-end orchestrated through Turbo,
+This application is built using Ruby on Rails 7.1, esbuild, and PostgreSQL, with a front-end orchestrated through Turbo,
 Stimulus, and React.js. This blend allows for rapid UI updates, complex interactions, and scalable structure, ensuring
 that the app can handle dynamic content efficiently.
 
@@ -70,20 +73,20 @@ that the app can handle dynamic content efficiently.
     - **React.js:** Used for more complex UI components that require state management and dynamic data handling.
 
 - **Database:**
-    - **SQLite:** A lightweight database used for local development and testing, ensuring quick setup and minimal
-      configuration.
+    - **PostgreSQL:** A robust, open-source object-relational database system, known for its scalability and strong data
+      integrity, ideal for complex and high-volume applications.
 
 - **Styling:**
     - **Bootstrap 5:** Utilized for responsive and modern UI designs.
 
-The tech specification for this project can be explored in greater detail
+The tech specification for this project can be explored in detail
 here: [Technical Specification](https://gist.github.com/sp2410/d34d7b75e8a3fb1752ab2a14e74bee84).
 
 ## Local Usage
 
 1. **Initialize the Application**
-    - Start the application using `bin/dev`.
-    - Ensure the Redis server and Sidekiq workers are running.
+    - Start external services using `docker-compose up -d`
+    - Start local services using `bin/dev`
 
 2. **Load Videos**
     - Go to `http://localhost:3000/setting`, check data source is set properly and click button `Fetch Videos`.
@@ -109,16 +112,17 @@ here: [Technical Specification](https://gist.github.com/sp2410/d34d7b75e8a3fb175
 4. **Manage Playlists**
     - Go to `http://localhost:3000/playlists` to get access to playlists.
 
-   The management is built using RoR + turbo except playlist show page that is implemented using React.js. 
+   The management is built using RoR + turbo except playlist show page that is implemented using React.js.
    Playlist show page has complex functionality that's why it's need to use react.
 
    Users are able to do the following actions on playlist show page:
 
-   - view playlist videos (frontend is built to load videos using endless pagination)
-   - search videos by title
-   - select videos (please active select mode on top left corner on view) and remove selected videos from the playlist
-   - reorder videos (please active reorder mode on top right corner on view), reorder videos using drag and drop and click
-     button save to save the changes
+    - view playlist videos (frontend is built to load videos using endless pagination)
+    - search videos by title
+    - select videos (please active select mode on top left corner on view) and remove selected videos from the playlist
+    - reorder videos (please active reorder mode on top right corner on view), reorder videos using drag and drop and
+      click
+      button save to save the changes
 
 ## Testing
 
