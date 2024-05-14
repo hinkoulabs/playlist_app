@@ -2,7 +2,13 @@
   display: flex;
   flex-direction: column;
   /* ensure this element takes full height of its container */
-  height: calc(100vh - 150px);
+  height: calc(100vh - 70px);
+}
+
+.playlist-videos {
+  .videos-container {
+    height: calc(100vh - 150px);
+  }
 }
 
 .videos-controls {
